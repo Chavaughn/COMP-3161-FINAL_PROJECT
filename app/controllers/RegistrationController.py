@@ -4,7 +4,7 @@ from app.controllers.AppController import *
 # === Register functionality ===
 
 @app.route('/register', methods=['POST', 'GET'])
-def register():
+def register_postman():
     first_name = request.json['first_name']
     last_name = request.json['last_name']
     password = request.json['password']

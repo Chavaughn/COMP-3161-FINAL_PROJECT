@@ -20,11 +20,11 @@ course_codes = []
 student_query = students.all()
 course_query = courses.all()
 
-for i in range(len(student_query)-1):
+for i in range(len(student_query)):
     student_id = student_query[i][0]
     student_ids.append((student_id))
 
-for i in range(len(course_query)-1):
+for i in range(len(course_query)):
     course_code = course_query[i][0]
     course_codes.append((course_code))
 
