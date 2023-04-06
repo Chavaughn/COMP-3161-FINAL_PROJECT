@@ -4,91 +4,15 @@ Jinja2 Documentation:    https://jinja.palletsprojects.com/
 Werkzeug Documentation:  https://werkzeug.palletsprojects.com/
 This file contains the routes for your application.
 """
-import os
 
-from sqlalchemy import func
-from app import app, db, login_manager
-from flask import render_template, request, redirect, send_from_directory, url_for, flash, session, abort
-from flask_login import login_user, logout_user, current_user, login_required
-from werkzeug.utils import secure_filename
-from app.models import Admin, Assignment, Room, Employee, Grades, Parent, Student, Subject, Teacher, UserProfile
-from app.forms import AddStudentForm, LoginForm, SignupForm
-from werkzeug.security import check_password_hash
+from app import app
+from flask import render_template
+from app.forms import LoginForm, RegistrationForm
 from app.controllers.AppController import *
 
 ###
 # Routing for your application.
 ###
-@app.route('/')
-@logout_required
-def landing():
-    """Render website's home page."""
-    return render_template('landing.html')
-
-@app.route('/dashboard_example')
-@login_required
-def dashboard():
-    if current_user.user_type == 3:
-        result = load_child(current_user.get_id())
-        if result == None:
-            result = load_child_no_class(current_user.get_id())
-            if result == None:
-                return render_template('/student/dashboard.html.html', user=current_user, student=None)
-        student, student_class = result
-        if student is None:
-            return render_template('/student/dashboard.html.html', user=current_user, student=None)
-        return render_template('/student/dashboard.html.html', user=current_user, student=student, student_class=student_class)
-    elif current_user.user_type == 1 or current_user.user_type == 2: 
-        teacher = UserProfile.query.filter_by(id=current_user.id, user_type=2).first()
-        admin = UserProfile.query.filter_by(id=current_user.id, user_type=1).first()
-        if not teacher and not admin:
-            return render_template('404.html'), 404
-        if not admin:
-            employee = Employee.query.filter_by(user_profile_id=teacher.id).first()
-        else:
-            employee = Employee.query.filter_by(user_profile_id=admin.id).first()
-
-        if not employee:
-            flash('No employee found', 'danger')
-            return render_template('404.html'), 404
-
-        teacher_info = Teacher.query.filter_by(employee_id=employee.id).first()
-        admin_info = Admin.query.filter_by(employee_id=employee.id).first()
-        if not admin_info and not teacher_info:
-            flash('No teacher or admin found', 'danger')
-            return render_template('404.html'), 404
-        elif admin_info:
-            return render_template('/lecturer/dashboard.html', teacher=admin, teacher_info=admin_info)
-        teacher_class = Room.query.filter_by(id=teacher_info.class_id).first()
-        student_count = len(Student.query.filter_by(class_id=teacher_info.class_id).all())
-        # Get student information for the teacher's class
-        students = Student.query.filter_by(class_id=teacher_info.class_id).all()
-
-        # Get subjects in the database
-        subjects = Subject.query.all()
-
-        # Calculate each student's average grade for each subject
-        student_subject_grades = []
-        for student in students:
-            student_subject_grades.append({
-                'student_info': student,
-                'subject_grades': [
-                    {
-                        'subject_info': subject,
-                        'avg_grade': db.session.query(func.avg(Grades.grade)).join(Assignment).\
-                                    filter(Grades.student_id == student.id, Assignment.subject_id == subject.id).\
-                                    scalar()
-                    }
-                    for subject in subjects
-                ]
-            })
-        return render_template('/lecturer/dashboard.html', teacher=teacher, teacher_info=teacher_info, teacher_class=teacher_class, student_count=student_count, students=students, subjects=subjects, student_subject_grades=student_subject_grades)
-
-
-@app.route('/about/')
-def about():
-    """Render the website's about page."""
-    return render_template('about.html', name="Database Project 1")
 
 
 @app.after_request

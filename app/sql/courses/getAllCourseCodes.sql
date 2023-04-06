@@ -1,0 +1,1 @@
+SELECT course_code FROM Course;

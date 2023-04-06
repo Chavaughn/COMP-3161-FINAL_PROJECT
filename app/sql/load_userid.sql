@@ -1,0 +1,1 @@
+  SELECT account_id FROM Account WHERE account_id = :id;

@@ -1,0 +1,205 @@
+course_code,course_name,course_description,lecturer_id
+COMP1001,Introduction to Computer Science,N/A,42
+MATH1010,Calculus I,N/A,28
+PHYS1001,General Physics I,N/A,23
+ECON1001,Principles of Microeconomics,N/A,16
+HIST1001,Introduction to World History,N/A,16
+ENGL1001,Composition and Rhetoric I,N/A,16
+PSYC1001,Introduction to Psychology,N/A,32
+BIOL1001,General Biology I,N/A,7
+CHEM1001,General Chemistry I,N/A,4
+PHIL1001,Introduction to Philosophy,N/A,14
+COMP2001,Data Structures and Algorithms,N/A,7
+MATH2010,Calculus II,N/A,33
+PHYS2001,General Physics II,N/A,10
+ECON2001,Principles of Macroeconomics,N/A,20
+HIST2001,World History from 1500 to the Present,N/A,9
+ENGL2001,Composition and Rhetoric II,N/A,2
+PSYC2001,Developmental Psychology,N/A,4
+BIOL2001,General Biology II,N/A,32
+CHEM2001,General Chemistry II,N/A,31
+PHIL2001,Logic and Critical Thinking,N/A,34
+COMP3001,Operating Systems,N/A,27
+MATH3010,Calculus III,N/A,27
+PHYS3001,Modern Physics,N/A,33
+ECON3001,Intermediate Microeconomics,N/A,12
+HIST3001,The History of the United States,N/A,30
+ENGL3001,Advanced Composition and Rhetoric,N/A,25
+PSYC3001,Social Psychology,N/A,26
+BIOL3001,Cell Biology,N/A,8
+CHEM3001,Organic Chemistry I,N/A,14
+PHIL3001,Epistemology,N/A,3
+COMP4001,Computer Networks,N/A,3
+MATH4010,Differential Equations,N/A,1
+PHYS4001,Quantum Mechanics,N/A,28
+ECON4001,Intermediate Macroeconomics,N/A,15
+HIST4001,Europe in the Twentieth Century,N/A,21
+ENGL4001,Literary Theory and Criticism,N/A,31
+PSYC4001,Abnormal Psychology,N/A,40
+BIOL4001,Genetics,N/A,28
+CHEM4001,Organic Chemistry II,N/A,18
+PHIL4001,Philosophy of Science,N/A,44
+ART1001,Introduction to Art History,N/A,19
+BUSN1001,Introduction to Business,N/A,8
+COMM1001,Introduction to Communication,N/A,48
+EDUC1001,Introduction to Education,N/A,16
+FREN1001,Elementary French I,N/A,44
+GEOG1001,Introduction to Geography,N/A,19
+ITAL1001,Elementary Italian I,N/A,1
+JAPA1001,Elementary Japanese I,N/A,2
+LATN1001,Elementary Latin I,N/A,12
+MUSC1001,Introduction to Music,N/A,8
+PORT1001,Elementary Portuguese I,N/A,12
+RUSS1001,Elementary Russian I,N/A,17
+SPAN1002,Elementary Spanish II,N/A,49
+THEA1001,Introduction to Theatre,N/A,8
+ART2001,Renaissance Art,N/A,10
+BUSN2001,Marketing Principles,N/A,22
+COMM2001,Media and Society,N/A,25
+EDUC2001,Child and Adolescent Development,N/A,36
+FREN2001,Intermediate French I,N/A,42
+GEOG2001,Cultural Geography,N/A,45
+ITAL2001,Intermediate Italian I,N/A,9
+JAPA2001,Intermediate Japanese I,N/A,31
+LATN2001,Intermediate Latin I,N/A,16
+MUSC2001,Music Theory I,N/A,5
+PORT2001,Intermediate Portuguese I,N/A,44
+RUSS2001,Intermediate Russian I,N/A,36
+SPAN2001,Intermediate Spanish I,N/A,20
+THEA2001,History of Theatre I,N/A,7
+ART3001,Modern Art,N/A,48
+BUSN3001,Financial Management,N/A,8
+COMM3001,Communication Theory,N/A,5
+EDUC3001,Teaching in Elementary Schools,N/A,6
+FREN3001,Advanced French I,N/A,18
+GEOG3001,Economic Geography,N/A,34
+ITAL3001,Advanced Italian I,N/A,36
+JAPA3001,Advanced Japanese I,N/A,33
+LATN3001,Advanced Latin I,N/A,17
+MUSC3001,Music Theory II,N/A,27
+ANTH1001, Introduction to Anthropology,N/A,9
+ARTH1001, Introduction to Art History I,N/A,4
+BUSN1002, Introduction to Accounting,N/A,38
+CHEM1002, Introduction to Analytical Chemistry,N/A,11
+ECON1002, Principles of Macroeconomics,N/A,33
+ENGL1002, Composition and Rhetoric II,N/A,17
+HIST1002, Introduction to European History,N/A,36
+MATH1002, Linear Algebra,N/A,3
+PHYS1002, General Physics II,N/A,6
+PSYC1002, Research Methods in Psychology,N/A,13
+SOC1001, Introduction to Sociology,N/A,5
+SPAN3001, Advanced Spanish II,N/A,47
+STAT1001,Introduction to Statistics,N/A,18
+PHIL1002,Introduction to Ethics,N/A,23
+GEOG1002,Physical Geography,N/A,14
+MKTG1001,Introduction to Marketing,N/A,33
+ANTH2001,Cultural Anthropology,N/A,22
+ARTH2001,Introduction to Art History II,N/A,38
+MATH2001,Discrete Mathematics,N/A,47
+ENGL2002,Literature and Culture,N/A,8
+SOC2001,Social Problems and Issues,N/A,1
+ARCH1001,Introduction to Architecture,N/A,21
+BIOM1001,Introduction to Biomedical Engineering,N/A,38
+CHEM1003,Introductory Organic Chemistry,N/A,45
+COMP1002,Programming Fundamentals,N/A,1
+ECON1003,Introduction to Econometrics,N/A,32
+ENGL1003,Introduction to Creative Writing,N/A,25
+FINC1001,Introduction to Finance,N/A,41
+HIST1003,Ancient World Civilizations,N/A,4
+MATH1003,Probability and Statistics,N/A,36
+PHIL1003,Introduction to Political Philosophy,N/A,17
+PHYS1003,Introduction to Astronomy,N/A,46
+PSYC1003,Introduction to Cognitive Psychology,N/A,40
+SOC1002, Sociology of Globalization,N/A,22
+SPAN1012,Intermediate Spanish II,N/A,23
+STAT1002,Regression Analysis,N/A,21
+THEA1002,Introduction to Acting,N/A,25
+ARCH2001,History of Architecture,N/A,20
+BIOM2001,Medical Imaging Systems,N/A,37
+CHEM2003,Inorganic Chemistry,N/A,9
+COMP2002,Computer Organization and Architecture,N/A,19
+ECON2002,International Trade and Finance,N/A,40
+ENGL2003,Shakespeare,N/A,5
+FINC2001,Investment Analysis,N/A,10
+HIST2003,Asian Civilizations,N/A,17
+MATH2003,Number Theory,N/A,41
+PHIL2003,Philosophy of Language,N/A,46
+PHYS2003,Thermal Physics,N/A,13
+PSYC2003,Abnormal Child Psychology,N/A,12
+SOC2002,Sociology of Crime and Deviance,N/A,29
+SPAN2002,Advanced Spanish I,N/A,49
+STAT2001,Probability Theory,N/A,40
+THEA2002,Playwriting,N/A,2
+ARCH3001,Sustainable Architecture,N/A,49
+BIOM3001,Biomedical Instrumentation,N/A,10
+CHEM3003,Physical Chemistry,N/A,18
+COMP3002,Database Systems,N/A,45
+ECON3002,Economic Development,N/A,22
+ENGL3003,American Literature,N/A,35
+FINC3001,Corporate Finance,N/A,33
+HIST3003,African Civilizations,N/A,13
+MATH3003,Complex Analysis,N/A,6
+PHIL3003,Philosophy of Mind,N/A,25
+PHYS3003,Electromagnetism,N/A,6
+PSYC3003,Psychology of Personality,N/A,30
+SOC3001,Class and Stratification,N/A,47
+SPAN3002,Spanish for Business,N/A,2
+STAT3001,Stochastic Processes,N/A,16
+THEA3001,Theatre Production,N/A,49
+ARCH4001,Architectural Design,N/A,25
+CHEM4003,Biochemistry,N/A,21
+ASTR1001,Introduction to Astrophysics,N/A,48
+BIOM3002,Biomechanics,N/A,32
+CHEM3002,Physical Chemistry I,N/A,30
+COMP1003,Web Programming,N/A,5
+ECON4002,Development Economics,N/A,41
+ENGL3002,Modern American Literature,N/A,15
+GEOG2002,Geographic Information Systems,N/A,15
+HIST3002,African American History,N/A,42
+ITAL3002,Italian Renaissance Art,N/A,26
+MATH3011,Mathematical Modeling,N/A,20
+PHIL3002,Philosophy of Mind,N/A,48
+PHYS3002,Electricity and Magnetism,N/A,26
+PSYC3002,Health Psychology,N/A,19
+STAT2101,Statistical Inference,N/A,28
+ANTH3001,Medical Anthropology,N/A,43
+ARTH3001,Contemporary Art,N/A,27
+BUSN4001,Entrepreneurship,N/A,43
+CHEM4002,Biochemistry,N/A,3
+COMP4002,Software Engineering,N/A,27
+ECON4003,Environmental Economics,N/A,26
+EDUC4001,Curriculum Design and Evaluation,N/A,42
+FREN4001,Advanced French II,N/A,38
+GEOG3002,Urban Geography,N/A,27
+HIST4002,History of Science and Technology,N/A,41
+ITAL4001,Italian Cinema,N/A,32
+JAPA4001,Advanced Japanese II,N/A,10
+MATH4001,Advanced Calculus,N/A,38
+PHIL4002,Existentialism,N/A,28
+PHYS4002,Thermodynamics and Statistical Mechanics,N/A,23
+PSYC4002,Positive Psychology,N/A,49
+ANTH2002,Archaeology,N/A,45
+ARTH2002,Art Since 1945,N/A,7
+BUSN2002,Managerial Accounting,N/A,40
+CHEM2004,Physical Chemistry II,N/A,50
+COMP2003,Database Systems,N/A,4
+ECON2003,Labor Economics,N/A,5
+EDUC2002,Teaching in Secondary Schools,N/A,24
+FREN2002,Intermediate French II,N/A,43
+GEOG2003,Political Geography,N/A,17
+ITAL2002,Advanced Italian II,N/A,15
+JAPA2002,Intermediate Japanese II,N/A,23
+LATN2002,Intermediate Latin II,N/A,10
+MUSC2002,Music Theory III,N/A,37
+PHIL2004,Philosophy of Religion,N/A,7
+RUSS2002,Intermediate Russian II,N/A,37
+SPAN2012,Advanced Spanish I,N/A,47
+THEA2202,History of Theatre II,N/A,45
+ANTH4001,Anthropology of Globalization,N/A,22
+ARTH4001,Topics in Contemporary Art,N/A,22
+BUSN4002,Strategic Management,N/A,34
+CHEM4013,Chemical Biology,N/A,46
+COMP4003,Artificial Intelligence,N/A,2
+ECON4004,International Finance,N/A,49
+ENGL4002,Postcolonial Literature,N/A,23
+GEOG4001,Geography of Development,N/A,1

@@ -1,56 +1,66 @@
-from app import app, db
-from flask import render_template, request, redirect, url_for, flash
+from app import app, db, hosturl
+from flask import jsonify, render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user, current_user, login_required
-from app.models import UserProfile
-from app.forms import LoginForm
+from app.forms import LoginForm, RegistrationForm
 from werkzeug.security import check_password_hash
 from app.controllers.AppController import *
+from app.models import Account
+import requests
 
 
 # === Login functionality ===
-@app.route('/parent-login', methods=['POST', 'GET'])
+@app.route('/', methods=['POST', 'GET'])
 @logout_required
-def login():
+def landing():
     if current_user.is_authenticated:
         # if user is already logged in, just redirect them to our secure page
-        # or some other page like a dashboard
         flash('User is already logged in.', 'info')
-        return redirect(url_for('dashboard'))
+        return redirect(url_for('placeholder'))
 
-    # Here we use a class of some kind to represent and validate our
-    # client-side form data. For example, WTForms is a library that will
-    # handle this for us, and we use a custom LoginForm to validate.
-    form = LoginForm()
+    registration_form = RegistrationForm()
+    login_form = LoginForm()
     # Login and validate the user.
-    if form.validate_on_submit():
-        username = form.username.data
-        password = form.password.data
-
-        # Query our database to see if the username and password entered
-        # match a user that is in the database.
-        user = db.session.execute(db.select(UserProfile).filter_by(username=username)).scalar()
-
-        if user is not None and check_password_hash(user.password, password):
-
-            login_user(user, remember=False)
-
-            flash('Logged in successfully.', 'success')
-
+    if login_form.validate_on_submit():
+        if login_web(username=login_form.username.data, password=login_form.password.data) == 200:
             next_page = request.args.get('next')
-            return redirect(next_page or url_for('dashboard'))
-        else:
-            flash('Username or Password is incorrect.', 'danger')
+            return redirect(next_page or url_for('placeholder'))
+    flash_errors(login_form)
+    return render_template('landing.html', lform = login_form, rform = registration_form)
 
-    flash_errors(form)
-    return render_template('login.html', form=form)
+@app.route('/loginw', methods=['POST'])
+@logout_required
+def login_web(username, password):
+    user = Account.query.filter_by(username=username).first()
+    if user is not None and check_password_hash(user.password, password):
+        login_user(user, remember=True)
+        flash('Logged in successfully.', 'success')
+        return 200
+    else:
+        flash('Username or Password is incorrect.', 'danger')
 
+@app.route('/login', methods=['POST'])
+@logout_required
+def login_postman():
+    username = request.json['username']
+    password = request.json['password']
+    user = Account.query.filter_by(username=username).first()
+    if user is not None and check_password_hash(user.password, password):
+        login_user(user, remember=False)
+        return jsonify({"message": "Logged in successfully."},{"username":current_user.username}), 200
+    else:
+        return jsonify({"message": "Invalid username or password."}), 401
 
-@app.route("/logout")
+@app.route("/logout_current_user")
 @login_required
 def logout():
     # Logout the user and end the session
-    logout_user()
+    logout_user_api()
     flash('You have been logged out.', 'success')
     return redirect(url_for('landing'))
 
+@app.route("/logout")
+@login_required
+def logout_user_api():
+    logout_user()
+    return jsonify({"message": "Logged out successfully."}), 200
 # ...

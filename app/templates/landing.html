@@ -1,9 +1,63 @@
-{% extends "base.html" %} {% block css %}{% endblock %} {% block main %}
-<div></div>
-<h1 class="display-5 fw-bold">Welcome to the Database Project 1 Management Portal</h1>
-<p>This portal is for the registering of students/lecturers and management of other information. For this demo many features have been reduced as to show functionality</p>
-<div class="d-grid gap-2 d-md-flex justify-content-md-start">
-    <a href="{{ url_for('login') }}" class="btn btn-primary me-md-2" role="button">Login</a>
-    <a href="{{ url_for('signup') }}" class="btn btn-secondary" role="button">Sign Up</a>
+<link rel="stylesheet" href="/static/css/login_form.css">{% block css %}{% endblock %} {% block main %}
+<div class="login-body">
+    <aside class="aside-login-right"></aside>
+    <div class="login-boxes">
+        {% include 'flash_messages.html' %}
+        <div class="container" id="container">
+            <div class="form-container register-container">
+                <form action="#">
+                    <h1>Register here.</h1>
+                    {% for subfield in rform.account_type %}
+                    <tr class="radio-boxes-login">
+                        <td>{{ subfield }}</td>
+                        <td>{{ subfield.label }}</td>
+                    </tr>
+                    {% endfor %}
+                    <input type="text" placeholder="Name">
+                    <input type="email" placeholder="Email">
+                    <input type="password" placeholder="Password">
+                    <button>Register</button>
+                </form>
+            </div>
+
+            <div class="form-container login-container">
+                <form method="post">
+                    {{ lform.csrf_token }}
+                    <h1>Login here.</h1>
+                    {{ lform.username(placeholder="Enter your username") }} {{ lform.password(placeholder="Enter your password") }}
+                    <div class="content">
+                        <div class="checkbox">
+                            <input type="checkbox" name="checkbox" id="checkbox">
+                            <label>Remember me</label>
+                        </div>
+                    </div>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-left">
+                        <h1 class="title">Hello <br> friends</h1>
+                        <p>if Yout have an account, login here and have fun</p>
+                        <button class="ghost" id="login">Login
+                        <i class="lni lni-arrow-left login"></i>
+                    </button>
+                    </div>
+                    <div class="overlay-panel overlay-right">
+                        <h1 class="title">Start yout <br> journy now</h1>
+                        <p>if you don't have an account yet, join us and start your journey.</p>
+                        <button class="ghost" id="register">Register
+                        <i class="lni lni-arrow-right register"></i>
+                    </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <aside class="aside-login-left"></aside>
+
+    {% endblock %} {% block js %}
 </div>
-{% endblock %} {% block js %}{% endblock %}
+<script src="{{ url_for('static', filename='js/login_form.js') }}"></script> {% endblock %}
