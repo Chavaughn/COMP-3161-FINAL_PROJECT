@@ -29,10 +29,17 @@ accounts = []
 counter = 0
 password = generate_password_hash("password", method='pbkdf2:sha256')
 for first_name in first_names:
+    if counter >= 100052:
+        break
     for last_name in last_names:
         username = 6201420000+counter
         email = f"{username}@mymona.uwi.edu"
-        account_type = 3
+        if counter < 100000:
+            account_type = 3#100,000 students
+        elif counter >= 100000 and counter < 100050:
+            account_type = 2#50 teachers
+        else:
+            account_type = 1#?? admins
         accounts.append({
             "first_name": first_name,
             "last_name": last_name,
@@ -41,7 +48,8 @@ for first_name in first_names:
             "email": email,
             "account_type": account_type
         })
-        full_name = f"{first_name} {last_name}"
+        if counter >= 100052:
+            break
         counter = counter+1
 with open('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/accounts.csv', 'w', newline='') as csvfile:
     fieldnames = ['first_name', 'last_name', 'username','password', 'email', 'account_type']

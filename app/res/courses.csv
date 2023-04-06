@@ -11,7 +11,7 @@ CHEM1001,General Chemistry I,N/A,4
 PHIL1001,Introduction to Philosophy,N/A,14
 COMP2001,Data Structures and Algorithms,N/A,7
 MATH2010,Calculus II,N/A,33
-PHYS2001,General Physics II,N/A,10
+PHYS2001,General Physics II,N/A,46
 ECON2001,Principles of Macroeconomics,N/A,20
 HIST2001,World History from 1500 to the Present,N/A,9
 ENGL2001,Composition and Rhetoric II,N/A,2
@@ -19,18 +19,18 @@ PSYC2001,Developmental Psychology,N/A,4
 BIOL2001,General Biology II,N/A,32
 CHEM2001,General Chemistry II,N/A,31
 PHIL2001,Logic and Critical Thinking,N/A,34
-COMP3001,Operating Systems,N/A,27
+COMP3001,Operating Systems,N/A,30
 MATH3010,Calculus III,N/A,27
-PHYS3001,Modern Physics,N/A,33
+PHYS3001,Modern Physics,N/A,14
 ECON3001,Intermediate Microeconomics,N/A,12
 HIST3001,The History of the United States,N/A,30
-ENGL3001,Advanced Composition and Rhetoric,N/A,25
+ENGL3001,Advanced Composition and Rhetoric,N/A,31
 PSYC3001,Social Psychology,N/A,26
-BIOL3001,Cell Biology,N/A,8
+BIOL3001,Cell Biology,N/A,11
 CHEM3001,Organic Chemistry I,N/A,14
 PHIL3001,Epistemology,N/A,3
 COMP4001,Computer Networks,N/A,3
-MATH4010,Differential Equations,N/A,1
+MATH4010,Differential Equations,N/A,39
 PHYS4001,Quantum Mechanics,N/A,28
 ECON4001,Intermediate Macroeconomics,N/A,15
 HIST4001,Europe in the Twentieth Century,N/A,21
@@ -50,18 +50,18 @@ JAPA1001,Elementary Japanese I,N/A,2
 LATN1001,Elementary Latin I,N/A,12
 MUSC1001,Introduction to Music,N/A,8
 PORT1001,Elementary Portuguese I,N/A,12
-RUSS1001,Elementary Russian I,N/A,17
+RUSS1001,Elementary Russian I,N/A,43
 SPAN1002,Elementary Spanish II,N/A,49
 THEA1001,Introduction to Theatre,N/A,8
 ART2001,Renaissance Art,N/A,10
-BUSN2001,Marketing Principles,N/A,22
+BUSN2001,Marketing Principles,N/A,37
 COMM2001,Media and Society,N/A,25
 EDUC2001,Child and Adolescent Development,N/A,36
 FREN2001,Intermediate French I,N/A,42
 GEOG2001,Cultural Geography,N/A,45
 ITAL2001,Intermediate Italian I,N/A,9
 JAPA2001,Intermediate Japanese I,N/A,31
-LATN2001,Intermediate Latin I,N/A,16
+LATN2001,Intermediate Latin I,N/A,44
 MUSC2001,Music Theory I,N/A,5
 PORT2001,Intermediate Portuguese I,N/A,44
 RUSS2001,Intermediate Russian I,N/A,36
@@ -69,7 +69,7 @@ SPAN2001,Intermediate Spanish I,N/A,20
 THEA2001,History of Theatre I,N/A,7
 ART3001,Modern Art,N/A,48
 BUSN3001,Financial Management,N/A,8
-COMM3001,Communication Theory,N/A,5
+COMM3001,Communication Theory,N/A,35
 EDUC3001,Teaching in Elementary Schools,N/A,6
 FREN3001,Advanced French I,N/A,18
 GEOG3001,Economic Geography,N/A,34
@@ -90,7 +90,7 @@ PSYC1002, Research Methods in Psychology,N/A,13
 SOC1001, Introduction to Sociology,N/A,5
 SPAN3001, Advanced Spanish II,N/A,47
 STAT1001,Introduction to Statistics,N/A,18
-PHIL1002,Introduction to Ethics,N/A,23
+PHIL1002,Introduction to Ethics,N/A,34
 GEOG1002,Physical Geography,N/A,14
 MKTG1001,Introduction to Marketing,N/A,33
 ANTH2001,Cultural Anthropology,N/A,22
@@ -127,13 +127,13 @@ PHIL2003,Philosophy of Language,N/A,46
 PHYS2003,Thermal Physics,N/A,13
 PSYC2003,Abnormal Child Psychology,N/A,12
 SOC2002,Sociology of Crime and Deviance,N/A,29
-SPAN2002,Advanced Spanish I,N/A,49
+SPAN2002,Advanced Spanish I,N/A,13
 STAT2001,Probability Theory,N/A,40
 THEA2002,Playwriting,N/A,2
 ARCH3001,Sustainable Architecture,N/A,49
 BIOM3001,Biomedical Instrumentation,N/A,10
 CHEM3003,Physical Chemistry,N/A,18
-COMP3002,Database Systems,N/A,45
+COMP3002,Database Systems,N/A,49
 ECON3002,Economic Development,N/A,22
 ENGL3003,American Literature,N/A,35
 FINC3001,Corporate Finance,N/A,33
@@ -148,7 +148,7 @@ STAT3001,Stochastic Processes,N/A,16
 THEA3001,Theatre Production,N/A,49
 ARCH4001,Architectural Design,N/A,25
 CHEM4003,Biochemistry,N/A,21
-ASTR1001,Introduction to Astrophysics,N/A,48
+ASTR1001,Introduction to Astrophysics,N/A,46
 BIOM3002,Biomechanics,N/A,32
 CHEM3002,Physical Chemistry I,N/A,30
 COMP1003,Web Programming,N/A,5
@@ -200,6 +200,6 @@ ARTH4001,Topics in Contemporary Art,N/A,22
 BUSN4002,Strategic Management,N/A,34
 CHEM4013,Chemical Biology,N/A,46
 COMP4003,Artificial Intelligence,N/A,2
-ECON4004,International Finance,N/A,49
+ECON4004,International Finance,N/A,50
 ENGL4002,Postcolonial Literature,N/A,23
-GEOG4001,Geography of Development,N/A,1
+GEOG4001,Geography of Development,N/A,39
