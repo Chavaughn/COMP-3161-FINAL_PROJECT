@@ -107,28 +107,52 @@ with open('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/enrollments.csv', mode=
         student_rows = [{'student_id': student_id, 'course_code': course_code.strip()} for course_code in chosen_courses]
         writer.writerows(student_rows)
 
-print("***************Calandar Events***************")
 # Generate calendar events
 calendar_events = []
+forum_posts = []
+discussion_threads = []
+x=0
 for course_code in course_codes:
     for i in range(10):
         calendar_events.append({
             'due_date': f'2023-04-{random.randint(1,30):02d}',
             'given_date': datetime.now()
         })
+    forum_posts.append({
+        'course_code': course_code.strip()
+    })
+    discussion_threads.append({
+        'title': f'Discussion thread for course {course_code.strip()}',
+        'forum_id': x+1,
+        'message': 'This is the first post in the discussion thread.',
+        'initial_message': 1,
+        'account_id': random.randint(1,100000)
+    })
+    x = x+1
+replies = []
+i=0
+for discussion_thread in discussion_threads:
+    i = i+1
+    x=0
+    for o in range(random.randint(1,10)):
+        x=x+1
+        replies.append({
+            'title': f'Discussion thread reply for thread',
+            'thread_id': i,
+            'message': f'Reply {x} to the discussion thread.',
+            'initial_message': 0,
+            'account_id': random.randint(1,100000)
+        })
+
+print("***************Calandar Events***************")
 with open('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/calendar_events.csv', mode='w', newline='') as csv_file:
     fieldnames = [ 'due_date', 'given_date'] 
     writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
     writer.writeheader()
     for event in calendar_events:
         writer.writerow(event)
+
 print("***************Forums***************")
-# Generate forum posts
-forum_posts = []
-for course_code in course_codes:
-    forum_posts.append({
-        'course_code': course_code
-    })
 with open('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/forum_posts.csv', mode='w', newline='') as csv_file:
     fieldnames = ['course_code'] 
     writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
@@ -138,42 +162,16 @@ with open('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/forum_posts.csv', mode=
 
 
 print("***************Threads***************")
-# Generate discussion threads
-discussion_threads = []
-i=0
-for course_code in course_codes:
-    discussion_threads.append({
-        'forum_id': i+1,
-        'title': f'Discussion thread for course {course_code}',
-        'message': 'This is the first post in the discussion thread.',
-        'initial_message': 1,
-        'account_id': random.randint(1,100000)
-    })
 with open('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/threads.csv', mode='w', newline='') as csv_file:
-    fieldnames = ['forum_id', 'title', 'message', 'initial_message', 'account_id'] 
+    fieldnames = ['title', 'forum_id', 'message', 'initial_message', 'account_id'] 
     writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
     writer.writeheader()
     for discussion_thread in discussion_threads:
         writer.writerow(discussion_thread)
 
 print("***************Thread Reply***************")
-# Generate replies to discussion threads
-replies = []
-i=0
-x=0
-for discussion_thread in discussion_threads:
-    i+1
-    for i in range(random.randint(1,10)):
-        x+1
-        replies.append({
-            'thread_id': i,
-            'title': f'Discussion thread reply for thread',
-            'message': f'Reply {i} to the discussion thread.',
-            'initial_message': 0,
-            'account_id': random.randint(1,100000)
-        })
 with open('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/thread_replies.csv', mode='w', newline='') as csv_file:
-    fieldnames = ['thread_id', 'title', 'message', 'initial_message', 'account_id'] 
+    fieldnames = ['title', 'thread_id', 'message', 'initial_message', 'account_id'] 
     writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
     writer.writeheader()
     for reply in replies:

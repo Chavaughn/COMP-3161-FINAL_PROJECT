@@ -55,11 +55,20 @@ CREATE TABLE IF NOT EXISTS StudentCourse(
 CREATE TABLE IF NOT EXISTS Section (
     section_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     section_name VARCHAR(256) NOT NULL,
+    course_code VARCHAR(16),
+    FOREIGN KEY (course_code) REFERENCES Course (course_code)
+);
+
+-- create the CourseContent table
+CREATE TABLE IF NOT EXISTS CourseContent (
+    course_content_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    content_name VARCHAR(128) NOT NULL,
+    content_description VARCHAR(2056),
     slides VARCHAR(128),
     links VARCHAR(128),
     files VARCHAR(128),
-    course_code VARCHAR(16),
-    FOREIGN KEY (course_code) REFERENCES Course (course_code)
+    section_id BIGINT UNSIGNED,
+    FOREIGN KEY (section_id) REFERENCES Section (section_id)
 );
 
 -- create the Forum table
