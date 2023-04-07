@@ -2,10 +2,11 @@ from functools import wraps
 
 from sqlalchemy import text
 from app import app, db, login_manager, hosturl
-from flask import redirect, render_template, url_for, flash
+from flask import jsonify, redirect, render_template, url_for, flash
 from flask_login import UserMixin, current_user
 
 from app.models import Account
+
 
 
 

@@ -1,0 +1,1 @@
+SELECT * FROM Student WHERE account_id = :account_id;

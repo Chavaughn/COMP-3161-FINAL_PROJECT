@@ -1,0 +1,1 @@
+INSERT INTO Student (account_id) VALUES (:account_id);

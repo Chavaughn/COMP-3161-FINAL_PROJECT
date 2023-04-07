@@ -1,0 +1,1 @@
+SELECT COUNT(*) FROM Course WHERE lecturer_id = :lecturer_id

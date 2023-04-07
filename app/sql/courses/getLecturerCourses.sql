@@ -1,0 +1,1 @@
+SELECT * FROM Course WHERE lecturer_id = :lecturer_id;
