@@ -50,7 +50,6 @@ CREATE TABLE IF NOT EXISTS StudentCourse(
     FOREIGN KEY (student_id) REFERENCES Student(student_id)
 );
 
-
 -- create the Section table
 CREATE TABLE IF NOT EXISTS Section (
     section_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -148,10 +147,20 @@ CREATE TABLE IF NOT EXISTS ThreadReply (
 
 -- create the Grade table
 CREATE TABLE IF NOT EXISTS Grade (
-    grade_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     score FLOAT,
     student_id BIGINT UNSIGNED,
     assignment_id BIGINT UNSIGNED,
+    PRIMARY KEY (student_id, assignment_id),
+    FOREIGN KEY (student_id) REFERENCES Student (student_id),
+    FOREIGN KEY (assignment_id) REFERENCES Assignment (assignment_id)
+);
+
+-- create the Grade table
+CREATE TABLE IF NOT EXISTS StudentUploads (
+    student_id BIGINT UNSIGNED,
+    assignment_id BIGINT UNSIGNED,
+    file_name VARCHAR(2056),
+    PRIMARY KEY (student_id, assignment_id),
     FOREIGN KEY (student_id) REFERENCES Student (student_id),
     FOREIGN KEY (assignment_id) REFERENCES Assignment (assignment_id)
 );
