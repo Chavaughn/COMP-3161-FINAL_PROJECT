@@ -64,11 +64,38 @@ CREATE TABLE IF NOT EXISTS CourseContent (
     course_content_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     content_name VARCHAR(128) NOT NULL,
     content_description VARCHAR(2056),
-    slides VARCHAR(128),
-    links VARCHAR(128),
-    files VARCHAR(128),
     section_id BIGINT UNSIGNED,
     FOREIGN KEY (section_id) REFERENCES Section (section_id)
+);
+
+-- create the Slide table
+CREATE TABLE IF NOT EXISTS CourseSlide (
+    slide_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    slide_name VARCHAR(128) NOT NULL,
+    slide_description VARCHAR(2056),
+    slide_link VARCHAR(2056),
+    course_content_id BIGINT UNSIGNED,
+    FOREIGN KEY (course_content_id) REFERENCES CourseContent (course_content_id)
+);
+
+-- create the Link table
+CREATE TABLE IF NOT EXISTS CourseLink (
+    link_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    link_name VARCHAR(128) NOT NULL,
+    link_description VARCHAR(2056),
+    link_link VARCHAR(2056),
+    course_content_id BIGINT UNSIGNED,
+    FOREIGN KEY (course_content_id) REFERENCES CourseContent (course_content_id)
+);
+
+-- create the File table
+CREATE TABLE IF NOT EXISTS CourseFile (
+    file_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    file_name VARCHAR(128) NOT NULL,
+    file_description VARCHAR(2056),
+    file_link VARCHAR(2056),
+    course_content_id BIGINT UNSIGNED,
+    FOREIGN KEY (course_content_id) REFERENCES CourseContent (course_content_id)
 );
 
 -- create the Forum table
