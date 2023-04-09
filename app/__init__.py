@@ -27,14 +27,14 @@ db = SQLAlchemy(app)
 
 hosturl = app.config['HOSTURL']
 
-from app import database_operations
+# from app import database_operations
+from app import json_messages
 
 
 # Flask-Login login manager
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = '/'
-
 
 
 

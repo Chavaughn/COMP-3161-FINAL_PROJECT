@@ -30,5 +30,7 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (account_id);
 
+
+
 -- ___________________________________SEPARATION FROM FILE LOADS___________________________
 

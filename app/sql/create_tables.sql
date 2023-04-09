@@ -46,34 +46,74 @@ CREATE TABLE IF NOT EXISTS Student (
 CREATE TABLE IF NOT EXISTS StudentCourse(
     course_code VARCHAR(16),
     student_id BIGINT UNSIGNED,
+    PRIMARY KEY(course_code, student_id),
     FOREIGN KEY (course_code) REFERENCES Course(course_code),
     FOREIGN KEY (student_id) REFERENCES Student(student_id)
 );
-
 
 -- create the Section table
 CREATE TABLE IF NOT EXISTS Section (
     section_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     section_name VARCHAR(256) NOT NULL,
-    slides VARCHAR(128),
-    links VARCHAR(128),
-    files VARCHAR(128),
     course_code VARCHAR(16),
     FOREIGN KEY (course_code) REFERENCES Course (course_code)
+);
+
+-- create the CourseContent table
+CREATE TABLE IF NOT EXISTS CourseContent (
+    course_content_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    content_name VARCHAR(128) NOT NULL,
+    content_description VARCHAR(2056),
+    section_id BIGINT UNSIGNED,
+    FOREIGN KEY (section_id) REFERENCES Section (section_id)
+);
+
+-- create the Slide table
+CREATE TABLE IF NOT EXISTS CourseSlide (
+    slide_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    slide_name VARCHAR(128) NOT NULL,
+    slide_description VARCHAR(2056),
+    slide_link VARCHAR(2056),
+    course_content_id BIGINT UNSIGNED,
+    FOREIGN KEY (course_content_id) REFERENCES CourseContent (course_content_id)
+);
+
+-- create the Link table
+CREATE TABLE IF NOT EXISTS CourseLink (
+    link_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    link_name VARCHAR(128) NOT NULL,
+    link_description VARCHAR(2056),
+    link_link VARCHAR(2056),
+    course_content_id BIGINT UNSIGNED,
+    FOREIGN KEY (course_content_id) REFERENCES CourseContent (course_content_id)
+);
+
+-- create the File table
+CREATE TABLE IF NOT EXISTS CourseFile (
+    file_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    file_name VARCHAR(128) NOT NULL,
+    file_description VARCHAR(2056),
+    file_link VARCHAR(2056),
+    course_content_id BIGINT UNSIGNED,
+    FOREIGN KEY (course_content_id) REFERENCES CourseContent (course_content_id)
 );
 
 -- create the Forum table
 CREATE TABLE IF NOT EXISTS Forum (
     forum_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     course_code VARCHAR(16),
+    forum_name VARCHAR(128),
     FOREIGN KEY (course_code) REFERENCES Course (course_code)
 );
 
 -- create the CalendarEvent table
 CREATE TABLE IF NOT EXISTS CalendarEvent (
     calendar_event_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    course_code VARCHAR(16),
+    calendar_event_name VARCHAR(128),
     due_date DATE NOT NULL,
-    given_date DATE NOT NULL
+    given_date DATE NOT NULL,
+    FOREIGN KEY (course_code) REFERENCES Course (course_code)
 );
 
 -- create the Assignment table
@@ -112,10 +152,58 @@ CREATE TABLE IF NOT EXISTS ThreadReply (
 
 -- create the Grade table
 CREATE TABLE IF NOT EXISTS Grade (
-    grade_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     score FLOAT,
     student_id BIGINT UNSIGNED,
     assignment_id BIGINT UNSIGNED,
+    PRIMARY KEY (student_id, assignment_id),
     FOREIGN KEY (student_id) REFERENCES Student (student_id),
     FOREIGN KEY (assignment_id) REFERENCES Assignment (assignment_id)
 );
+
+-- create the Grade table
+CREATE TABLE IF NOT EXISTS StudentUploads (
+    student_id BIGINT UNSIGNED,
+    assignment_id BIGINT UNSIGNED,
+    file_name VARCHAR(2056),
+    PRIMARY KEY (student_id, assignment_id),
+    FOREIGN KEY (student_id) REFERENCES Student (student_id),
+    FOREIGN KEY (assignment_id) REFERENCES Assignment (assignment_id)
+);
+
+-- Final Average View Per Course
+CREATE VIEW StudentCourseFinalAverage AS
+SELECT
+  Student.student_id,
+  Course.course_code,
+  ROUND(AVG(Grade.score), 2) AS final_average
+FROM
+  Student
+  INNER JOIN StudentCourse ON Student.student_id = StudentCourse.student_id
+  INNER JOIN Course ON StudentCourse.course_code = Course.course_code
+  INNER JOIN Assignment ON Course.course_code = Assignment.course_code
+  INNER JOIN Grade ON Student.student_id = Grade.student_id AND Assignment.assignment_id = Grade.assignment_id
+GROUP BY
+  Student.student_id,
+  Course.course_code;
+
+-- Final average view for student
+CREATE VIEW StudentFinalAverage AS
+SELECT
+  subquery.student_id,
+  AVG(final_avg_per_student) AS final_average
+FROM (
+  SELECT
+    Student.student_id,
+    ROUND(AVG(Grade.score),2) AS final_avg_per_student
+  FROM
+    Student
+    INNER JOIN StudentCourse ON Student.student_id = StudentCourse.student_id
+    JOIN Course ON StudentCourse.course_code = Course.course_code
+    INNER JOIN Assignment ON Course.course_code = Assignment.course_code
+    INNER JOIN Grade ON Student.student_id = Grade.student_id AND Assignment.assignment_id = Grade.assignment_id
+  GROUP BY
+    Student.student_id,
+    Course.course_code
+) AS subquery
+GROUP BY
+  subquery.student_id;

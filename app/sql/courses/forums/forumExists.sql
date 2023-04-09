@@ -1,0 +1,1 @@
+SELECT EXISTS(SELECT 1 FROM Forum WHERE forum_id = :forum_id);

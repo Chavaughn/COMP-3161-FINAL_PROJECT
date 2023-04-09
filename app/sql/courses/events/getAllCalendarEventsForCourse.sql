@@ -1,0 +1,1 @@
+SELECT * FROM CalendarEvent WHERE course_code = :course_code;

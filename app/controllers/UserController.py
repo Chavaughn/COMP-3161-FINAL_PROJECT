@@ -8,7 +8,7 @@ from app.models import Account
 import requests
 
 
-# === Login functionality ===
+# *****************Login form*****************
 @app.route('/', methods=['POST', 'GET'])
 @logout_required
 def landing():
@@ -27,6 +27,7 @@ def landing():
     flash_errors(login_form)
     return render_template('landing.html', lform = login_form, rform = registration_form)
 
+# *****************Login 2*****************
 @app.route('/loginw', methods=['POST'])
 @logout_required
 def login_web(username, password):
@@ -38,6 +39,7 @@ def login_web(username, password):
     else:
         flash('Username or Password is incorrect.', 'danger')
 
+# *****************Login 1*****************
 @app.route('/login', methods=['POST'])
 @logout_required
 def login_postman():
@@ -50,6 +52,7 @@ def login_postman():
     else:
         return jsonify({"message": "Invalid username or password."}), 401
 
+# *****************Logout*****************
 @app.route("/logout_current_user")
 @login_required
 def logout():
