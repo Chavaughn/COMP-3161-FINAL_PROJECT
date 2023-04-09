@@ -1,0 +1,1 @@
+SELECT * FROM Forum WHERE course_code = :course_code;

@@ -2,8 +2,9 @@ from functools import wraps
 
 from sqlalchemy import text
 from app import app, db, login_manager, hosturl
-from flask import jsonify, redirect, render_template, url_for, flash
+from flask import jsonify, make_response, redirect, render_template, url_for, flash
 from flask_login import UserMixin, current_user
+from app.json_messages import UNAUTHORIZED
 
 from app.models import Account
 
@@ -42,3 +43,9 @@ def load_user(id):
     user = db.session.execute(db.select(Account).filter_by(account_id=id)).scalar()
     return user
 
+# Handle login required error
+@app.errorhandler(401)
+def unauthorized(error):
+    response = make_response(UNAUTHORIZED)
+    response.headers['Content-Type'] = 'application/json'
+    return response

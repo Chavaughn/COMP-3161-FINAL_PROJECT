@@ -12,7 +12,7 @@ FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 ROWS
-( due_date, given_date);
+(course_code, calendar_event_name, due_date, given_date);
 
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/forum_posts.csv'
 INTO TABLE Forum
@@ -20,7 +20,7 @@ FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 ROWS
-(course_code);
+(course_code, forum_name);
 
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/threads.csv'
 INTO TABLE Thread

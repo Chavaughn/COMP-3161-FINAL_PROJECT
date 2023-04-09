@@ -4,8 +4,7 @@ from werkzeug.security import generate_password_hash
 
 from app.json_messages import *
 
-# === Register functionality ===
-
+# *****************Register*****************
 @app.route('/register', methods=['POST', 'GET'])
 def register_postman():
     first_name = request.json['first_name']
@@ -47,7 +46,7 @@ def register_postman():
             with app.app_context():
                 db.session.execute(text(sql_script), {"account_id": user[0]})
                 db.session.commit()
-        return jsonify({"message": "Lecturer successfully registered"},{"username": username}), 200
+        return jsonify({"message": "Lecturer successfully registered"},{"username": username}), 201
     elif(account_type == 3):
         #register student
         with open('./app/sql/students/registerStudent.sql', 'r') as file:
@@ -55,7 +54,7 @@ def register_postman():
             with app.app_context():
                 db.session.execute(text(sql_script), {"account_id": user[0]})
                 db.session.commit()
-        return jsonify({"message": "Student successfully registered"},{"username":username}), 200
+        return jsonify({"message": "Student successfully registered"},{"username":username}), 201
     else:
         return INVALID_REGISTRATION
 # ...

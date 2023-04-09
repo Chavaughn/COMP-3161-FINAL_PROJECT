@@ -1,0 +1,1 @@
+SELECT * FROM Thread WHERE forum_id = :forum_id;

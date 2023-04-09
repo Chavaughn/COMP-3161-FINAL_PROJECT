@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS Student (
 CREATE TABLE IF NOT EXISTS StudentCourse(
     course_code VARCHAR(16),
     student_id BIGINT UNSIGNED,
+    PRIMARY KEY(course_code, student_id),
     FOREIGN KEY (course_code) REFERENCES Course(course_code),
     FOREIGN KEY (student_id) REFERENCES Student(student_id)
 );
@@ -101,14 +102,18 @@ CREATE TABLE IF NOT EXISTS CourseFile (
 CREATE TABLE IF NOT EXISTS Forum (
     forum_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     course_code VARCHAR(16),
+    forum_name VARCHAR(128),
     FOREIGN KEY (course_code) REFERENCES Course (course_code)
 );
 
 -- create the CalendarEvent table
 CREATE TABLE IF NOT EXISTS CalendarEvent (
     calendar_event_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    course_code VARCHAR(16),
+    calendar_event_name VARCHAR(128),
     due_date DATE NOT NULL,
-    given_date DATE NOT NULL
+    given_date DATE NOT NULL,
+    FOREIGN KEY (course_code) REFERENCES Course (course_code)
 );
 
 -- create the Assignment table
@@ -164,3 +169,41 @@ CREATE TABLE IF NOT EXISTS StudentUploads (
     FOREIGN KEY (student_id) REFERENCES Student (student_id),
     FOREIGN KEY (assignment_id) REFERENCES Assignment (assignment_id)
 );
+
+-- Final Average View Per Course
+CREATE VIEW StudentCourseFinalAverage AS
+SELECT
+  Student.student_id,
+  Course.course_code,
+  ROUND(AVG(Grade.score), 2) AS final_average
+FROM
+  Student
+  INNER JOIN StudentCourse ON Student.student_id = StudentCourse.student_id
+  INNER JOIN Course ON StudentCourse.course_code = Course.course_code
+  INNER JOIN Assignment ON Course.course_code = Assignment.course_code
+  INNER JOIN Grade ON Student.student_id = Grade.student_id AND Assignment.assignment_id = Grade.assignment_id
+GROUP BY
+  Student.student_id,
+  Course.course_code;
+
+-- Final average view for student
+CREATE VIEW StudentFinalAverage AS
+SELECT
+  subquery.student_id,
+  AVG(final_avg_per_student) AS final_average
+FROM (
+  SELECT
+    Student.student_id,
+    ROUND(AVG(Grade.score),2) AS final_avg_per_student
+  FROM
+    Student
+    INNER JOIN StudentCourse ON Student.student_id = StudentCourse.student_id
+    JOIN Course ON StudentCourse.course_code = Course.course_code
+    INNER JOIN Assignment ON Course.course_code = Assignment.course_code
+    INNER JOIN Grade ON Student.student_id = Grade.student_id AND Assignment.assignment_id = Grade.assignment_id
+  GROUP BY
+    Student.student_id,
+    Course.course_code
+) AS subquery
+GROUP BY
+  subquery.student_id;

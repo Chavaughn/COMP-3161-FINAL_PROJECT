@@ -92,12 +92,15 @@ for course_code in course_codes:
     b = b+1
     for i in range(10):
         calendar_events.append({
+            'course_code': course_code.strip(),
+            'calendar_event_name': f'Event: {i} for Course: {course_code}',
             'due_date': f'2023-04-{random.randint(1,30):02d}',
             'given_date': datetime.now()
         })
         events.append(a)
     forum_posts.append({
-        'course_code': course_code.strip()
+        'course_code': course_code.strip(),
+        'forum_name': f"Fourm for {course_code}"
     })
     discussion_threads.append({
         'title': f'Discussion thread for course {course_code.strip()}',
@@ -237,7 +240,7 @@ for section in sections:
 
 print("***************Calandar Events***************")
 with open('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/calendar_events.csv', mode='w', newline='') as csv_file:
-    fieldnames = [ 'due_date', 'given_date'] 
+    fieldnames = [ 'course_code', 'calendar_event_name', 'due_date', 'given_date'] 
     writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
     writer.writeheader()
     for event in calendar_events:
@@ -245,7 +248,7 @@ with open('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/calendar_events.csv', m
 
 print("***************Forums***************")
 with open('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/forum_posts.csv', mode='w', newline='') as csv_file:
-    fieldnames = ['course_code'] 
+    fieldnames = ['course_code', 'forum_name'] 
     writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
     writer.writeheader()
     for forum in forum_posts:
