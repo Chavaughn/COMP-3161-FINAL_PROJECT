@@ -1,0 +1,178 @@
+<link rel="stylesheet" href="/static/css/home.css">
+
+{% extends "base.html" %}
+
+{% block main %}
+    <div class="container">
+    <!-- <aside class="aside-login-right"></aside> -->
+        <div class="left-section">
+            <!-- Content for the left section goes here -->
+            <div class="home-header-container">
+                <!-- <img id="home-icon" src="/static/uploads/graphics/home.png"> -->
+                <h2 id="title">My Courses</h2>
+            </div>
+            <!-- <p>Below you will find all the courses that you, the student are enrolled to this semester as well as the related information.</p> -->
+            <ul>
+                <li class="nav-item">
+                    <a href="{{ url_for('course') }}">
+                        <div class="course-box">
+                            <h3 class="course-title">COMP3161 - Database Management</h3>
+                            <p class="course-lecturer">Lecturer: Yoichi Isagi</p>
+                            <p class="course-description">Or kind rest bred with am shed then. In raptures building an bringing be. Elderly is detract tedious assured private so to visited.</p>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('course') }}">
+                        <div class="course-box">
+                            <h3 class="course-title">INFO3180 - Web Development 2</h3>
+                            <p class="course-lecturer">Lecturer: Nagi Seishirou</p>
+                            <p class="course-description">Unfeeling so rapturous discovery he exquisite. Reasonably so middletons or impression by terminated. Old pleasure required removing elegance him had.</p>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('course') }}">
+                        <div class="course-box">
+                            <h3 class="course-title">COMP2211 - Pain and Suffering</h3>
+                            <p class="course-lecturer">Lecturer: Reo Mikage</p>
+                            <p class="course-description">Be me shall purse my ought times. Joy years doors all would again rooms these. Solicitude announcing as to sufficient my. No my reached suppose proceed pressed perhaps he.</p>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('course') }}">
+                        <div class="course-box">
+                            <h3 class="course-title">SWEN3130 - Software Engineering</h3>
+                            <p class="course-lecturer">Lecturer: Bachira Meguru</p>
+                            <p class="course-description">Rooms oh fully taken by worse do. Points afraid but may end law lasted. Was out laughter raptures returned outweigh. Luckily cheered colonel me do we attacks on highest enabled.</p>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('course') }}">
+                        <div class="course-box">
+                            <h3 class="course-title">COMP3161 - Database Management</h3>
+                            <p class="course-lecturer">Lecturer: Yoichi Isagi</p>
+                            <p class="course-description">Or kind rest bred with am shed then. In raptures building an bringing be. Elderly is detract tedious assured private so to visited.</p>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('course') }}">
+                        <div class="course-box">
+                            <h3 class="course-title">INFO3180 - Web Development 2</h3>
+                            <p class="course-lecturer">Lecturer: Nagi Seishirou</p>
+                            <p class="course-description">Unfeeling so rapturous discovery he exquisite. Reasonably so middletons or impression by terminated. Old pleasure required removing elegance him had.</p>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('course') }}">
+                        <div class="course-box">
+                            <h3 class="course-title">COMP2211 - Pain and Suffering</h3>
+                            <p class="course-lecturer">Lecturer: Reo Mikage</p>
+                            <p class="course-description">Be me shall purse my ought times. Joy years doors all would again rooms these. Solicitude announcing as to sufficient my. No my reached suppose proceed pressed perhaps he.</p>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('course') }}">
+                        <div class="course-box">
+                            <h3 class="course-title">SWEN3130 - Software Engineering</h3>
+                            <p class="course-lecturer">Lecturer: Bachira Meguru</p>
+                            <p class="course-description">Rooms oh fully taken by worse do. Points afraid but may end law lasted. Was out laughter raptures returned outweigh. Luckily cheered colonel me do we attacks on highest enabled.</p>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        
+        <div class="right-section">
+
+        <div id="calendar-box"><img id="calendar" src="/static/uploads/graphics/calendar.jpg"></div>
+
+        <div class="forum-header-container">
+            <img id="forum-icon" src="/static/uploads/graphics/megaphone.png">
+            <h2 id="forum-header">Recent News Posts</h2>
+        </div>
+        
+        <ul>
+            <li class="nav-item">
+                <a href="{{ url_for('forum') }}">
+                    <div class="forum-box">
+                        <h3 class="forum-title">Exam schedule</h3>
+                        <p class="forum-date-poster">April 9, 2023 | Yoichi Isagi</p>
+                        <p class="forum-description">Hello students, the exam date has been set and will be held face-to-face by the Faculty of Law.</p>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/course.html">
+                    <div class="forum-box">
+                        <h3 class="forum-title">Regarding lab 4</h3>
+                        <p class="forum-date-poster">April 4, 2023 | Nagi Seishirou</p>
+                        <p class="forum-description">Please contact your lab tech about arranging to have your lab marked by next week.</p>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/course.html">
+                    <div class="forum-box">
+                        <h3 class="forum-title">Missing class</h3>
+                        <p class="forum-date-poster">March 25, 2023 | Barou Shouhei</p>
+                        <p class="forum-description">I won't be able to make it to class today, please read chapter 2 in my absence</p>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/course.html">
+                    <div class="forum-box">
+                        <h3 class="forum-title">Extension on lab 2</h3>
+                        <p class="forum-date-poster">March 19, 2023 | Jinpachi Ego</p>
+                        <p class="forum-description">Lab 2 will be given a 1 day extension. If you have submitted already you may resubmit without penalty.</p>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url_for('forum') }}">
+                    <div class="forum-box">
+                        <h3 class="forum-title">Exam schedule</h3>
+                        <p class="forum-date-poster">April 9, 2023 | Yoichi Isagi</p>
+                        <p class="forum-description">Hello students, the exam date has been set and will be held face-to-face by the Faculty of Law.</p>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/course.html">
+                    <div class="forum-box">
+                        <h3 class="forum-title">Regarding lab 4</h3>
+                        <p class="forum-date-poster">April 4, 2023 | Nagi Seishirou</p>
+                        <p class="forum-description">Please contact your lab tech about arranging to have your lab marked by next week.</p>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/course.html">
+                    <div class="forum-box">
+                        <h3 class="forum-title">Missing class</h3>
+                        <p class="forum-date-poster">March 25, 2023 | Barou Shouhei</p>
+                        <p class="forum-description">I won't be able to make it to class today, please read chapter 2 in my absence</p>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/course.html">
+                    <div class="forum-box">
+                        <h3 class="forum-title">Extension on lab 2</h3>
+                        <p class="forum-date-poster">March 19, 2023 | Jinpachi Ego</p>
+                        <p class="forum-description">Lab 2 will be given a 1 day extension. If you have submitted already you may resubmit without penalty.</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+        </div>
+    <!-- <aside class="aside-login-left"></aside> -->
+    </div>
+{% endblock %}
