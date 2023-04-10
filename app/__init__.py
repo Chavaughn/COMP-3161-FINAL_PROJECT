@@ -4,7 +4,7 @@ import random
 import subprocess
 import time
 # Install required packages from requirements.txt
-#subprocess.call(['pip', 'install', '-r', 'requirements.txt'])
+# subprocess.call(['pip', 'install', '-r', 'requirements.txt'])
 #Comment out this line once it finished ^
 
 from flask import Flask
