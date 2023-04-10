@@ -8,10 +8,10 @@
         <div class="left-section">
             <!-- Content for the left section goes here -->
             <div class="home-header-container">
-                <img id="home-icon" src="/static/uploads/graphics/home.png">
-                <h2 id="title">Home Page</h2>
+                <!-- <img id="home-icon" src="/static/uploads/graphics/home.png"> -->
+                <h2 id="title">My Courses</h2>
             </div>
-            <p>Below you will find all the courses that you, the student are enrolled to this semester as well as the related information.</p>
+            <!-- <p>Below you will find all the courses that you, the student are enrolled to this semester as well as the related information.</p> -->
             <ul>
                 <li class="nav-item">
                     <a href="{{ url_for('course') }}">
@@ -90,6 +90,9 @@
         
         
         <div class="right-section">
+
+        <div id="calendar-box"><img id="calendar" src="/static/uploads/graphics/calendar.jpg"></div>
+
         <div class="forum-header-container">
             <img id="forum-icon" src="/static/uploads/graphics/megaphone.png">
             <h2 id="forum-header">Recent News Posts</h2>
@@ -100,8 +103,8 @@
                 <a href="{{ url_for('forum') }}">
                     <div class="forum-box">
                         <h3 class="forum-title">Exam schedule</h3>
-                        <p class="forum-date-poster">April 9, 2023</p>
-                        <p class="course-description">Hello students, the exam date has been set and will be held face-to-face by the Faculty of Law.</p>
+                        <p class="forum-date-poster">April 9, 2023 | Yoichi Isagi</p>
+                        <p class="forum-description">Hello students, the exam date has been set and will be held face-to-face by the Faculty of Law.</p>
                     </div>
                 </a>
             </li>
@@ -110,7 +113,7 @@
                     <div class="forum-box">
                         <h3 class="forum-title">Regarding lab 4</h3>
                         <p class="forum-date-poster">April 4, 2023 | Nagi Seishirou</p>
-                        <p class="course-description">Please contact your lab tech about arranging to have your lab marked by next week.</p>
+                        <p class="forum-description">Please contact your lab tech about arranging to have your lab marked by next week.</p>
                     </div>
                 </a>
             </li>
@@ -118,8 +121,8 @@
                 <a href="/course.html">
                     <div class="forum-box">
                         <h3 class="forum-title">Missing class</h3>
-                        <p class="forum-date-poster">March 25, 2023</p>
-                        <p class="course-description">I won't be able to make it to class today, please read chapter 2 in my absence</p>
+                        <p class="forum-date-poster">March 25, 2023 | Barou Shouhei</p>
+                        <p class="forum-description">I won't be able to make it to class today, please read chapter 2 in my absence</p>
                     </div>
                 </a>
             </li>
@@ -127,8 +130,8 @@
                 <a href="/course.html">
                     <div class="forum-box">
                         <h3 class="forum-title">Extension on lab 2</h3>
-                        <p class="forum-date-poster">March 19, 2023</p>
-                        <p class="course-description">Lab 2 will be given a 1 day extension. If you have submitted already you may resubmit without penalty.</p>
+                        <p class="forum-date-poster">March 19, 2023 | Jinpachi Ego</p>
+                        <p class="forum-description">Lab 2 will be given a 1 day extension. If you have submitted already you may resubmit without penalty.</p>
                     </div>
                 </a>
             </li>
@@ -136,8 +139,8 @@
                 <a href="{{ url_for('forum') }}">
                     <div class="forum-box">
                         <h3 class="forum-title">Exam schedule</h3>
-                        <p class="forum-date-poster">April 9, 2023</p>
-                        <p class="course-description">Hello students, the exam date has been set and will be held face-to-face by the Faculty of Law.</p>
+                        <p class="forum-date-poster">April 9, 2023 | Yoichi Isagi</p>
+                        <p class="forum-description">Hello students, the exam date has been set and will be held face-to-face by the Faculty of Law.</p>
                     </div>
                 </a>
             </li>
@@ -146,7 +149,7 @@
                     <div class="forum-box">
                         <h3 class="forum-title">Regarding lab 4</h3>
                         <p class="forum-date-poster">April 4, 2023 | Nagi Seishirou</p>
-                        <p class="course-description">Please contact your lab tech about arranging to have your lab marked by next week.</p>
+                        <p class="forum-description">Please contact your lab tech about arranging to have your lab marked by next week.</p>
                     </div>
                 </a>
             </li>
@@ -154,8 +157,8 @@
                 <a href="/course.html">
                     <div class="forum-box">
                         <h3 class="forum-title">Missing class</h3>
-                        <p class="forum-date-poster">March 25, 2023</p>
-                        <p class="course-description">I won't be able to make it to class today, please read chapter 2 in my absence</p>
+                        <p class="forum-date-poster">March 25, 2023 | Barou Shouhei</p>
+                        <p class="forum-description">I won't be able to make it to class today, please read chapter 2 in my absence</p>
                     </div>
                 </a>
             </li>
@@ -163,8 +166,8 @@
                 <a href="/course.html">
                     <div class="forum-box">
                         <h3 class="forum-title">Extension on lab 2</h3>
-                        <p class="forum-date-poster">March 19, 2023</p>
-                        <p class="course-description">Lab 2 will be given a 1 day extension. If you have submitted already you may resubmit without penalty.</p>
+                        <p class="forum-date-poster">March 19, 2023 | Jinpachi Ego</p>
+                        <p class="forum-description">Lab 2 will be given a 1 day extension. If you have submitted already you may resubmit without penalty.</p>
                     </div>
                 </a>
             </li>

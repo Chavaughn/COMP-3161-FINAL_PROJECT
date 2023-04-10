@@ -33,6 +33,7 @@ ul {
     display: flex;
     align-items: center;
     padding-bottom: 20px;
+    margin-bottom: 0;
 }
 
 #home-icon {
@@ -44,7 +45,7 @@ ul {
 .course-box {
     border-radius: 10px;
     border: 1px solid rgba(217, 217, 217, 0.449);
-    padding: 15px;
+    padding: 25px;
     margin-bottom: 20px;
     box-shadow: 2px 2px 10px #88888852;
 }
@@ -66,7 +67,8 @@ ul {
     
     /* font-weight: bold; */
     font-size: 50;
-    color: rgb(4, 84, 134);
+    color: #2154a0;
+    font-weight: bolder;
 }
 
 
@@ -82,7 +84,8 @@ ul {
 .course-description {
     margin-top: 5px;
     margin-bottom: 5px;
-    color: rgb(0, 0, 0);
+    color: rgb(41, 89, 186);
+    font-weight: bold;
 }
 a:hover {
     text-decoration: none;
@@ -97,6 +100,7 @@ a:hover {
     display: flex;
     align-items: center;
     padding-bottom: 20px;
+    
 }
 
 #forum-icon {
@@ -117,6 +121,8 @@ a:hover {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     color: rgb(37, 107, 168);
+    font-weight: bold;
+
 }
 
 .forum-title{
@@ -125,7 +131,18 @@ a:hover {
     margin: 0;
 }
 .forum-date-poster{
-    color: rgb(113, 164, 167);
+    color: rgb(0, 171, 180);
     font-weight: bold;
     margin: 0;
+}
+.forum-description{
+    color: rgb(5, 64, 81);
+}
+#calendar-box{
+    margin-bottom: 20px;
+}
+#calendar{
+    width: 100%;
+    box-shadow: 2px 2px 10px #4849797d;
+    border-radius: 10px;
 }

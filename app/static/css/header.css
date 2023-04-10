@@ -21,7 +21,27 @@
 }
 
 
+.home-btn {
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+    padding-bottom: 10px;
+}
+#nav-home-icon{
+    width: 50;
+    /* padding-bottom: 10px; */
+    /* vertical-align: middle; */
 
+}
+.navbar-brand{
+    /* padding-top: 10; */
+    font-size: 40px;
+    vertical-align: middle;
+    margin-left: 10;
+
+}
 
   /* border: 1px solid #a33ab1;
   background-color: #a76daf; */
+
+  
