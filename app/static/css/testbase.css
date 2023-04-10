@@ -1,0 +1,45 @@
+    body {
+        /*padding-top: 5rem;*/
+        background-color: rgb(244, 244, 244);
+        height: 100%;
+    }
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    
+    
+    main {
+        display: flex;
+        flex-direction: row;
+        min-height: 90vh;
+    }
+    /*main area (including footer)*/
+    .true-body {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        /* background-color: #22a310; */
+    }
+    
+    .red {
+        color: red!important;
+    }
+    
+    
+    /*main section (not including footer section)*/
+    .main-area {
+        width: 100%;
+        height: 100%;
+        /* background-color: aqua; */
+    }
+
+    
+    .sidebar-nav {
+        height: 100%;
+        align-content: flex-start;
+        padding-left: 1vw;
+        padding-right: 0.5vw;
+        background-color: #181818;
+        min-height: 100vh;
+    }

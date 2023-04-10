@@ -1,5 +1,5 @@
 from app import app, db, hosturl
-from flask import jsonify, render_template, request, redirect, url_for, flash
+from flask import jsonify, render_template, request, redirect, url_for, flash, abort
 from flask_login import login_user, logout_user, current_user, login_required
 from app.forms import LoginForm, RegistrationForm
 from werkzeug.security import check_password_hash
@@ -25,7 +25,7 @@ def landing():
             next_page = request.args.get('next')
             return redirect(next_page or url_for('placeholder'))
     flash_errors(login_form)
-    return render_template('landing.html', lform = login_form, rform = registration_form)
+    return render_template('landing.html', lform=login_form, rform=registration_form)
 
 @app.route('/loginw', methods=['POST'])
 @logout_required
@@ -63,4 +63,13 @@ def logout():
 def logout_user_api():
     logout_user()
     return jsonify({"message": "Logged out successfully."}), 200
-# ...
+
+
+# === Custom error handlers ===
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template('404.html'), 404
+
+# @app.route("/test")
+# def test():
+#     return render_template('test.html')

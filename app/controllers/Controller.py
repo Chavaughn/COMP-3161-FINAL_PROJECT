@@ -20,26 +20,29 @@ def flash_errors(form):
             ), 'danger')
 # ...
 
+@app.route('/placeholder')
+def placeholder():
+    """Custom 404 page."""
+   #print(current_user.account_id)
+    return render_template('404.html')
+
+@app.route('/profile')
+def profile():
+    return render_template('test.html')
+
+@app.route('/home')
+def home():
+    return render_template('home.html')
+
+@app.route('/course')
+def course():
+    return render_template('course.html')
+
+@app.route('/forum')
+def forum():
+    return render_template('forum.html')
 
 
 
 
-
-
-
-
-def logout_required(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if current_user.is_authenticated:
-            return redirect(url_for('landing'))
-        return f(*args, **kwargs)
-    return decorated_function
-
-@login_manager.user_loader
-def load_user(id):
-    #  with open('./app/sql/load_user.sql', 'r') as file:
-    #     sql_script = file.read()
-    user = db.session.execute(db.select(Account).filter_by(account_id=id)).scalar()
-    return user
 
