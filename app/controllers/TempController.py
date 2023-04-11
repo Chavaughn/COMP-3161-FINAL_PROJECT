@@ -20,11 +20,6 @@ def flash_errors(form):
             ), 'danger')
 # ...
 
-@app.route('/placeholder')
-def placeholder():
-    """Custom 404 page."""
-   #print(current_user.account_id)
-    return render_template('404.html')
 
 @app.route('/profile')
 def profile():

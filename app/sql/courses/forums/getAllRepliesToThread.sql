@@ -1,0 +1,1 @@
+SELECT * FROM ThreadReply WHERE thread_id = :thread_id;

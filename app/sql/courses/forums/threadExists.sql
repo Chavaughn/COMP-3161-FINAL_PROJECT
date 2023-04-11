@@ -1,0 +1,1 @@
+SELECT EXISTS(SELECT 1 FROM Thread WHERE thread_id = :thread_id);

@@ -28,7 +28,7 @@ FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 ROWS
-(title, forum_id, message, initial_message, account_id);
+(title, forum_id, message, account_id);
 
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/thread_replies.csv'
 INTO TABLE ThreadReply
@@ -68,4 +68,4 @@ FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 ROWS
-(score, student_id, assignment_id);
+(score, student_submission, student_id, assignment_id);

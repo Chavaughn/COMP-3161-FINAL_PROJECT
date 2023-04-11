@@ -252,3 +252,93 @@ def view_course_forum_threads(forum_id):
              }
                for thread in threads]
     return jsonify({"Forum_id ": forum_id, "threads:": threads})
+
+
+# *****************Add a new discussion thread to a forum*****************
+@app.route('/course/forums/threads/new', methods=['POST'])
+@login_required
+def create_course_forum_thread():
+    request_body = request.get_json()
+    forum_id = request_body.get('forum_id')
+    thread_title = request_body.get('thread_title')
+    thread_message = request_body.get('thread_message')
+    account_id = current_user.account_id
+
+    with open('./app/sql/courses/forums/forumExists.sql', 'r') as file:
+        sql_script = file.read()
+        with app.app_context():
+            forum_exists = db.session.execute(text(sql_script), {"forum_id": forum_id}).fetchone()
+
+    if not forum_exists[0]:
+        return FORUM_NOT_FOUND
+
+    with open('./app/sql/courses/forums/newThread.sql', 'r') as file:
+        sql_script = file.read()
+        with app.app_context():
+            db.session.execute(text(sql_script), {"forum_id": forum_id, "title": thread_title, "message": thread_message, "account_id": account_id})
+            db.session.commit()
+    
+    return jsonify({"Forum_id ": forum_id, "Status ": "Successfully created thread"}), 201
+
+# *****************Reply to a thread*****************
+@app.route('/course/forums/threads/reply', methods=['POST'])
+@login_required
+def reply_to_thread():
+    request_body = request.get_json()
+    thread_id = request_body.get('thread_id')
+    reply_title = request_body.get('reply_title')
+    reply_message = request_body.get('reply_message')
+    account_id = current_user.account_id
+    parent_reply_id = request_body.get('parent_reply_id')
+    initial_message = True if not parent_reply_id else False
+    with open('./app/sql/courses/forums/threadExists.sql', 'r') as file:
+        sql_script = file.read()
+        with app.app_context():
+            thread_exists = db.session.execute(text(sql_script), {"thread_id": thread_id}).fetchone()
+
+    if not thread_exists[0]:
+        return THREAD_NOT_FOUND
+
+    with open('./app/sql/courses/forums/newReply.sql', 'r') as file:
+        sql_script = file.read()
+        with app.app_context():
+            db.session.execute(text(sql_script), {"thread_id": thread_id, "title": reply_title, "message": reply_message,"initial_message": initial_message, "parent_reply_id":parent_reply_id, "account_id": account_id})
+            db.session.commit()
+    
+    return jsonify({"Thread_id ": thread_id, "Status ": "Successfully created thread"}), 201
+
+# *****************View all replies for a thread*****************
+@app.route('/course/forums/threads/replies/<int:thread_id>', methods=['GET'])
+def view_thread_replies(thread_id):
+    replies = []
+
+    with open('./app/sql/courses/forums/threadExists.sql', 'r') as file:
+        sql_script = file.read()
+        with app.app_context():
+            thread_exists = db.session.execute(text(sql_script), {"thread_id": thread_id}).fetchone()
+
+    if not thread_exists[0]:
+        return THREAD_NOT_FOUND
+
+    with open('./app/sql/courses/forums/getThread.sql', 'r') as file:
+        sql_script = file.read()
+        with app.app_context():
+            thread = db.session.execute(text(sql_script), {"thread_id": thread_id}).fetchone()
+
+    with open('./app/sql/courses/forums/getAllRepliesToThread.sql', 'r') as file:
+        sql_script = file.read()
+        with app.app_context():
+            replies = db.session.execute(text(sql_script), {"thread_id": thread_id}).fetchall()
+    if replies:
+        if replies[0]:
+            replies = [
+                {
+                    'thread_reply_id': reply.thread_reply_id,
+                    'title': reply.title,
+                    'message': reply.message,
+                    'Created By - account_id': reply.account_id,
+                    'initial_message': reply.initial_message,
+                    'parent_reply_id': reply.parent_reply_id,
+                }
+                for reply in replies]
+    return jsonify({"thread_a_id": thread_id,"thread_a_title": thread.title, "thread_aa_message": thread.message, "thread_replies": replies})

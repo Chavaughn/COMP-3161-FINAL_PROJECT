@@ -106,7 +106,6 @@ for course_code in course_codes:
         'title': f'Discussion thread for course {course_code.strip()}',
         'forum_id': x+1,
         'message': 'This is the first post in the discussion thread.',
-        'initial_message': 1,
         'account_id': random.randint(1,100000)
     })
     x = x+1
@@ -121,7 +120,7 @@ for discussion_thread in discussion_threads:
             'title': f'Discussion thread reply for thread',
             'thread_id': i,
             'message': f'Reply {x} to the discussion thread.',
-            'initial_message': 0,
+            'initial_message': 1,
             'account_id': random.randint(1,100000)
         })
 
@@ -192,12 +191,17 @@ for student_id, student_data in student_enrollment_data.items():
         for assignment_id in course_assignments[course['course_code']]:
             if 'scores' not in course:
                 course['scores'] = {}
+            if 'student_submission' not in course:
+                course['student_submission'] = {}
             if assignment_id not in course['scores']:
                 course['scores'][assignment_id] = {}
+                course['student_submission'] [assignment_id]= {}
             # Check if the student already has a score for this assignment
             if student_id not in course['scores'][assignment_id]:
                 score = random.randint(50, 100)
+                student_submission = "Hello pretend I am the answer to the question!"
                 course['scores'][assignment_id][student_id] = score
+                course['student_submission'][assignment_id][student_id] = student_submission
 a=0
 for section in sections:
     a = a+1
@@ -256,7 +260,7 @@ with open('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/forum_posts.csv', mode=
 
 print("***************Threads***************")
 with open('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/threads.csv', mode='w', newline='') as csv_file:
-    fieldnames = ['title', 'forum_id', 'message', 'initial_message', 'account_id'] 
+    fieldnames = ['title', 'forum_id', 'message', 'account_id'] 
     writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
     writer.writeheader()
     for discussion_thread in discussion_threads:
@@ -297,7 +301,7 @@ with open('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/assignments.csv', mode=
 # Write grades to CSV file
 print("***************Grades***************")
 with open('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/grades.csv', mode='w', newline='') as csv_file:
-    fieldnames = ['score', 'student_id', 'assignment_id']
+    fieldnames = ['score', 'student_submission', 'student_id', 'assignment_id']
     writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
     writer.writeheader()
     
@@ -307,8 +311,9 @@ with open('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/grades.csv', mode='w', 
         for course_data in enrollment_data['courses']:
             course_code = course_data['course_code']
             scores = course_data['scores']
+            student_submission = course_data['student_submission']
             # Iterate over scores for each course to extract assignment scores
             for assignment_id, score_dict in scores.items():
                 score = score_dict.get(student_id)
                 if score:
-                    writer.writerow({'score': score, 'student_id': student_id, 'assignment_id': assignment_id})
+                    writer.writerow({'score': score,'student_submission':student_submission, 'student_id': student_id, 'assignment_id': assignment_id})

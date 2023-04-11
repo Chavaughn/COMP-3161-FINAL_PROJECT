@@ -16,5 +16,6 @@ with app.app_context():
     FORUM_CREATED = jsonify({"message": "Forum event created successfully."}), 201
 
     COURSE_NOT_FOUND = jsonify({"error": "Course not found"}), 404
+    THREAD_NOT_FOUND = jsonify({"error": "Thread not found"}), 404
     STUDENT_NOT_FOUND = jsonify({"error": "Student not found"}), 404
     FORUM_NOT_FOUND = jsonify({"error": "Forum not found"}), 404

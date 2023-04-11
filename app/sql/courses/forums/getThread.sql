@@ -1,0 +1,1 @@
+SELECT * FROM Thread WHERE thread_id = :thread_id;

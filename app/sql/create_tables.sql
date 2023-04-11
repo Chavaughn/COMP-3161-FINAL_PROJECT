@@ -132,7 +132,6 @@ CREATE TABLE IF NOT EXISTS Thread (
     title VARCHAR(256),
     forum_id BIGINT UNSIGNED,
     message VARCHAR(2056),
-    initial_message BOOLEAN,
     account_id BIGINT UNSIGNED,
     FOREIGN KEY (forum_id) REFERENCES Forum (forum_id),
     FOREIGN KEY (account_id) REFERENCES Account (account_id)
@@ -145,6 +144,7 @@ CREATE TABLE IF NOT EXISTS ThreadReply (
     title VARCHAR(256),
     message VARCHAR(2056),
     initial_message BOOLEAN,
+    parent_reply_id BIGINT UNSIGNED,
     account_id BIGINT UNSIGNED,
     FOREIGN KEY (thread_id) REFERENCES Thread (thread_id),
     FOREIGN KEY (account_id) REFERENCES Account (account_id)
@@ -155,6 +155,7 @@ CREATE TABLE IF NOT EXISTS Grade (
     score FLOAT,
     student_id BIGINT UNSIGNED,
     assignment_id BIGINT UNSIGNED,
+    student_submission VARCHAR(15000),
     PRIMARY KEY (student_id, assignment_id),
     FOREIGN KEY (student_id) REFERENCES Student (student_id),
     FOREIGN KEY (assignment_id) REFERENCES Assignment (assignment_id)
