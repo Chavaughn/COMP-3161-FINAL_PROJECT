@@ -7,7 +7,7 @@ from werkzeug.security import generate_password_hash
 print("____________Creating the database____________")
 with app.app_context():
     #Edit this line to match your password
-    engine = create_engine('mysql+pymysql://root:NilArie12@localhost:3306')
+    engine = create_engine('mysql+pymysql://root:pass1nee@localhost:3306')
     with open('./app/sql/create_db.sql', 'r') as file:
         sql_script = file.read()
         with engine.connect() as conn:
