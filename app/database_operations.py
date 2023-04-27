@@ -71,6 +71,4 @@ with open('./app/sql/initialize_enrollments.sql', 'r') as file:
     with app.app_context():
         db.session.execute(text(sql_script))
         db.session.commit()
-
-
 print("____________Tables Populated____________")

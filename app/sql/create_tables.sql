@@ -64,6 +64,7 @@ CREATE TABLE IF NOT EXISTS CourseContent (
     course_content_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     content_name VARCHAR(128) NOT NULL,
     content_description VARCHAR(2056),
+    content_type INT,
     section_id BIGINT UNSIGNED,
     FOREIGN KEY (section_id) REFERENCES Section (section_id)
 );
@@ -146,7 +147,7 @@ CREATE TABLE IF NOT EXISTS ThreadReply (
     initial_message BOOLEAN,
     parent_reply_id BIGINT UNSIGNED,
     account_id BIGINT UNSIGNED,
-    FOREIGN KEY (thread_id) REFERENCES Thread (thread_id),
+    FOREIGN KEY (thread_id) REFERENCES Thread (thread_id) ON DELETE CASCADE,
     FOREIGN KEY (account_id) REFERENCES Account (account_id)
 );
 
@@ -161,7 +162,7 @@ CREATE TABLE IF NOT EXISTS Grade (
     FOREIGN KEY (assignment_id) REFERENCES Assignment (assignment_id)
 );
 
--- create the Grade table
+-- create the SrudentUpload table
 CREATE TABLE IF NOT EXISTS StudentUploads (
     student_id BIGINT UNSIGNED,
     assignment_id BIGINT UNSIGNED,

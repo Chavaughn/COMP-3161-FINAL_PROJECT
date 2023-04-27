@@ -4,12 +4,28 @@ from sqlalchemy import text
 from app import app, db, login_manager, hosturl
 from flask import jsonify, make_response, redirect, render_template, url_for, flash
 from flask_login import UserMixin, current_user
-from app.json_messages import UNAUTHORIZED
+from app.json_messages import COURSE_NOT_FOUND, STUDENT_NOT_FOUND, UNAUTHORIZED
 
 from app.models import Account
 
 
+def course_exists(course_code):
+    with open('./app/sql/courses/checkCourseExistence.sql', 'r') as file:
+        sql_script = file.read()
+        with app.app_context():
+            course_exists = db.session.execute(text(sql_script), {"course_code": course_code}).fetchone()
 
+    if not course_exists[0]:
+        return COURSE_NOT_FOUND
+
+def student_exists(username):
+    with open('./app/sql/students/checkStudentExistence.sql', 'r') as file:
+        sql_script = file.read()
+        with app.app_context():
+            student_exists = db.session.execute(text(sql_script), {"username": username}).fetchone()
+
+    if not student_exists[0]:
+        return STUDENT_NOT_FOUND
 
 # === Flash functionality ===
 def flash_errors(form):

@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash
 from app.json_messages import *
 
 # *****************Register*****************
-@app.route('/register', methods=['POST', 'GET'])
+@app.route('/api/register', methods=['POST', 'GET'])
 def register_postman():
     first_name = request.json['first_name']
     last_name = request.json['last_name']

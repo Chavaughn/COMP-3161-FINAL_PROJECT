@@ -80,24 +80,45 @@ with open('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/enrollments.csv', mode=
                 enrollment_data['courses'] = courses_list
     writer.writerows(student_rows)
 
-
+print("Checkpoint 1")
 # Generate calendar events
 calendar_events = []
 forum_posts = []
 discussion_threads = []
 events = []
+sections = []
+course_content = []
+# Create a dictionary to store the assignments for each course
+course_assignments = {course_code.strip(): [] for course_code in course_codes}
+course_events = {course_code.strip(): [] for course_code in course_codes}
+# Generate a list of assignments for each course
+assignments = []
 x=0
 b = 0
+ce_id=1
 for course_code in course_codes:
     b = b+1
+    sections.append({ 'section_name': 'Section 1','course_code': course_code.strip()})
+    sections.append({ 'section_name': 'Section 2','course_code': course_code.strip()})
+    sections.append({ 'section_name': 'Mid-Term Exam','course_code': course_code.strip()})
+    sections.append({ 'section_name': 'Section 3','course_code': course_code.strip()})
+    sections.append({ 'section_name': 'Final Exam','course_code': course_code.strip()})
     for i in range(10):
+        event = {
+            'calendar_event_id': ce_id,
+            'course_code': course_code.strip(),
+            'calendar_event_name': f'Event: {i} for Course: {course_code}',
+            'due_date': f'2023-05-{random.randint(1,30):02d}',
+            'given_date': datetime.now()
+        }
         calendar_events.append({
             'course_code': course_code.strip(),
             'calendar_event_name': f'Event: {i} for Course: {course_code}',
-            'due_date': f'2023-04-{random.randint(1,30):02d}',
+            'due_date': f'2023-05-{random.randint(1,30):02d}',
             'given_date': datetime.now()
         })
-        events.append(a)
+        ce_id = ce_id+1
+        course_events[course_code.strip()].append(event['calendar_event_id'])
     forum_posts.append({
         'course_code': course_code.strip(),
         'forum_name': f"Fourm for {course_code}"
@@ -109,6 +130,8 @@ for course_code in course_codes:
         'account_id': random.randint(1,100000)
     })
     x = x+1
+
+print("Checkpoint 2")
 replies = []
 i=0
 for discussion_thread in discussion_threads:
@@ -124,28 +147,19 @@ for discussion_thread in discussion_threads:
             'account_id': random.randint(1,100000)
         })
 
-sections = []
-course_content = []
-# Create a dictionary to store the assignments for each course
-course_assignments = {course_code.strip(): [] for course_code in course_codes}
-
-# Generate a list of assignments for each course
-assignments = []
+print("Checkpoint 3")
 c = 0
 b = 1
 for course_code in course_codes:
-    sections.append({ 'section_name': 'Section 1','course_code': course_code.strip()})
-    sections.append({ 'section_name': 'Section 2','course_code': course_code.strip()})
-    sections.append({ 'section_name': 'Mid-Term Exam','course_code': course_code.strip()})
-    sections.append({ 'section_name': 'Section 3','course_code': course_code.strip()})
-    sections.append({ 'section_name': 'Final Exam','course_code': course_code.strip()})
+    course_events_list = course_events[course_code.strip()]
     for j in range(1, 6):
         c = c + 1
+        random_event_id = random.choice(course_events_list)
         if j <= 3:
             assignment = {
                 'description': f'Assignment {j} for course: {course_code.strip()}', 
                 'assignment_id': b,
-                'calendar_event_id': c,
+                'calendar_event_id': random_event_id,
                 'course_code': course_code.strip()
             }
             assignments.append({
@@ -159,7 +173,7 @@ for course_code in course_codes:
             assignment = {
                 'description': f'Mid-Term for course: {course_code.strip()}', 
                 'assignment_id': b,
-                'calendar_event_id': c,
+                'calendar_event_id': random_event_id,
                 'course_code': course_code.strip()
             }
             assignments.append({
@@ -173,7 +187,7 @@ for course_code in course_codes:
             assignment = {
                 'description': f'Final for course: {course_code.strip()}', 
                 'assignment_id': b,
-                'calendar_event_id': c,
+                'calendar_event_id': random_event_id,
                 'course_code': course_code.strip()
             }
             assignments.append({
@@ -183,26 +197,30 @@ for course_code in course_codes:
                 })
             course_assignments[course_code.strip()].append(assignment['assignment_id'])
             b=b+1
+
+print("Checkpoint 4")
 # Loop through each student in the enrollment data
 for student_id, student_data in student_enrollment_data.items():
     # Loop through each course that the student is enrolled in
     for course in student_data['courses']:
-        # Generate scores for each assignment for the current course
-        for assignment_id in course_assignments[course['course_code']]:
-            if 'scores' not in course:
-                course['scores'] = {}
-            if 'student_submission' not in course:
-                course['student_submission'] = {}
-            if assignment_id not in course['scores']:
-                course['scores'][assignment_id] = {}
-                course['student_submission'] [assignment_id]= {}
-            # Check if the student already has a score for this assignment
-            if student_id not in course['scores'][assignment_id]:
-                score = random.randint(50, 100)
-                student_submission = "Hello pretend I am the answer to the question!"
-                course['scores'][assignment_id][student_id] = score
-                course['student_submission'][assignment_id][student_id] = student_submission
+        if course['course_code'] in course_assignments:
+            # Generate scores for each assignment for the current course
+            for assignment_id in course_assignments[course['course_code']]:
+                if 'scores' not in course:
+                    course['scores'] = {}
+                if 'student_submission' not in course:
+                    course['student_submission'] = {}
+                if assignment_id not in course['scores']:
+                    course['scores'][assignment_id] = {}
+                    course['student_submission'] [assignment_id]= {}
+                # Check if the student already has a score for this assignment
+                if student_id not in course['scores'][assignment_id]:
+                    score = random.randint(50, 100)
+                    student_submission = "Hello pretend I am the answer to the question!"
+                    course['scores'][assignment_id][student_id] = score
+                    course['student_submission'][assignment_id][student_id] = student_submission
 a=0
+print("Checkpoint 5")
 for section in sections:
     a = a+1
     if section['section_name'] == 'Mid-Term Exam':
@@ -306,12 +324,12 @@ with open('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/grades.csv', mode='w', 
     writer.writeheader()
     
     # Iterate over enrollment data for each student
-    for student_id, enrollment_data in student_enrollment_data.items():
+    for student_id, student_data in student_enrollment_data.items():
         # Iterate over courses
-        for course_data in enrollment_data['courses']:
-            course_code = course_data['course_code']
-            scores = course_data['scores']
-            student_submission = course_data['student_submission']
+        for course in student_data['courses']:
+            course_code = course['course_code']
+            scores = course['scores']
+            student_submission = course['student_submission']
             # Iterate over scores for each course to extract assignment scores
             for assignment_id, score_dict in scores.items():
                 score = score_dict.get(student_id)

@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="/static/css/home.css"> {% extends "base.html" %} {% block main %}
+<div class="container">
+    <div class="left-section">
+        <div class="home-header-container">
+            <h3 class="course-title">{{course_code}}</h3>
+        </div>
+        <p class="course-title">{{assignment.description}}</p>
+        <div class="">
+            <hr>
+            <h3>Details:</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Date Given </strong>{{assignment.given_date}}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Date Due </strong>{{assignment.due_date}}</p>
+                </div>
+                <div class="col-md-12">
+                    <hr> {% if assignment.score %}
+                    <h3>GRADED</h3>
+                    <p><strong>Score: </strong>{{assignment.score}}%</p>{% else %}
+                    <h3>UNGRADED</h3> {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

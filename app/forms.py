@@ -16,7 +16,7 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('*Password', validators=[DataRequired()])
     confirm_password = PasswordField('*Confirm Password', validators=[DataRequired(), EqualTo('password')])
     date_of_birth = DateField('*Date of Birth', validators=[DataRequired()])
-    account_type =RadioField("Select account type", choices=[(1,"Student"),(2,"Lecturer")])
+    account_type =RadioField("Select account type", choices=[(3,"Student"),(2,"Lecturer")])
 
 class AddStudentForm(FlaskForm):
     first_name = StringField('First Name', validators=[DataRequired()])

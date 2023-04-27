@@ -12,17 +12,17 @@
                 <span class="navbar-brand">ChavVLE</span>
             </a>
         </div>
-        
+
         <!-- <a class="navbar-brand" href="{{ url_for('home') }}">ChavVLE</a> -->
         <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span> -->
-      </button>
+        </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <!-- X Change out placeholder for the profile pages after -->
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('profile') }}">
-                    <img id="pfp" src="/static/uploads/profilepic.jpg" alt="Profile Picture" class="profile-pic">Che Hutchinson Serju</a>
+                        <img id="pfp" src="/static/uploads/profilepic.jpg" alt="Profile Picture" class="profile-pic">{{current_user.first_name}} {{current_user.last_name}}</a>
                 </li>
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('placeholder') }}">Initialize Database</a>
@@ -30,13 +30,13 @@
 
 
 
-                
+
                 <!-- {% if current_user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="#"> {{ current_user.first_name}} {{ current_user.last_name}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                    <a class="nav-link" href="{{ url_for('frontend_logout') }}">Logout</a>
                 </li>
                 {% else %}
                 <li class="nav-item">

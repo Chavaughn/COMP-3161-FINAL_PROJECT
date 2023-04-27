@@ -5,7 +5,7 @@ from app.controllers.AppController import *
 from app.json_messages import *
 
 # *****************Get All Courses*****************
-@app.route('/courses', methods=['GET'])
+@app.route('/api/courses', methods=['GET'])
 def get_all_courses():
     courses = []
     with open('./app/sql/courses/getAllCourses.sql', 'r') as file:
@@ -16,7 +16,7 @@ def get_all_courses():
     return jsonify({"courses":courses}), 200
 
 # *****************Get Courses that a student is enrolled in*****************
-@app.route('/courses/student=<int:username>', methods=['GET'])
+@app.route('/api/courses/student=<int:username>', methods=['GET'])
 def get_student_courses(username):
     courses = []
     with open('./app/sql/accounts/getAccount.sql', 'r') as file:
@@ -31,11 +31,11 @@ def get_student_courses(username):
             sql_script = file.read()
             with app.app_context():
                 courses = db.session.execute(text(sql_script), {"student_id":student[0]} ).all()
-            courses = [dict(course_code=course.course_code, Course_Name=(course.course_name)) for course in courses]
+            courses = [dict(course_code=course.course_code, Course_Name=(course.course_name), Lecturer_id = course.lecturer_id, Lecturer_name = f"{course.first_name} {course.last_name}") for course in courses]
     return jsonify({"courses":courses}), 200
 
 # *****************Get Courses that a lecturer does*****************
-@app.route('/courses/lecturer=<int:lecturer_id>', methods=['GET'])
+@app.route('/api/courses/lecturer=<int:lecturer_id>', methods=['GET'])
 def get_lecturer_courses(lecturer_id):
     courses = []
     # with open('./app/sql/lecturers/getLecturerAccount.sql', 'r') as file:
@@ -51,7 +51,7 @@ def get_lecturer_courses(lecturer_id):
     return jsonify({"courses":courses}), 200
 
 # *****************Add a lecturer to a course*****************
-@app.route('/course/lecturer/add_lecturer=<int:lecturer_id>', methods=['PUT'])
+@app.route('/api/course/lecturer/add_lecturer=<int:lecturer_id>', methods=['PUT'])
 def add_lecturer_course(lecturer_id):
     course_code = request.json['course_code']
     with open('./app/sql/lecturers/getLecturerAccount.sql', 'r') as file:
@@ -85,17 +85,11 @@ def add_lecturer_course(lecturer_id):
     return ADDED_TO_COURSE_LECTURER
 
 # *****************Get Members of a Course*****************
-@app.route('/course/members/<string:course_code>', methods=['GET'])
+@app.route('/api/course/members/<string:course_code>', methods=['GET'])
 def get_course_members(course_code):
     members = []
 
-    with open('./app/sql/courses/checkCourseExistence.sql', 'r') as file:
-        sql_script = file.read()
-        with app.app_context():
-            course_exists = db.session.execute(text(sql_script), {"course_code": course_code}).fetchone()
-
-    if not course_exists[0]:
-        return COURSE_NOT_FOUND
+    course_exists(course_code)
 
     with open('./app/sql/courses/getCourseMembers.sql', 'r') as file:
         sql_script = file.read()
@@ -108,7 +102,7 @@ def get_course_members(course_code):
     return jsonify({"members": members})
 
 # *****************Get Calendar Events Course*****************
-@app.route('/course/events/<string:course_code>', methods=['GET'])
+@app.route('/api/course/events/<string:course_code>', methods=['GET'])
 def get_course_calendar_events(course_code):
     events = []
 
@@ -136,7 +130,7 @@ def get_course_calendar_events(course_code):
     return jsonify({"Course ": course_code, "Calendar Events:": calendar_events})
 
 # *****************Create Calendar Event for a Course*****************
-@app.route('/course/events/create', methods=['POST'])
+@app.route('/api/course/events/create', methods=['POST'])
 @login_required
 def create_course_calendar_event():
     data = request.json
@@ -169,7 +163,7 @@ def create_course_calendar_event():
     
 
 # *****************View Forum for course*****************
-@app.route('/course/forums/view/<string:course_code>', methods=['GET'])
+@app.route('/api/course/forums/view/<string:course_code>', methods=['GET'])
 def view_course_forum(course_code):
     forums = []
 
@@ -197,7 +191,7 @@ def view_course_forum(course_code):
 
 
 # *****************Create Forum for a Course*****************
-@app.route('/course/forum/create', methods=['POST'])
+@app.route('/api/course/forum/create', methods=['POST'])
 @login_required
 def create_course_forum():
     data = request.json
@@ -225,7 +219,7 @@ def create_course_forum():
     return FORUM_CREATED
 
 # *****************View all threads for forum*****************
-@app.route('/course/forums/threads/view/<int:forum_id>', methods=['GET'])
+@app.route('/api/course/forums/threads/view/<int:forum_id>', methods=['GET'])
 def view_course_forum_threads(forum_id):
     threads = []
 
@@ -242,7 +236,7 @@ def view_course_forum_threads(forum_id):
         with app.app_context():
             threads = db.session.execute(text(sql_script), {"forum_id": forum_id}).fetchall()
 
-    if threads[0]:
+    if threads:
         threads = [
              {
                 'thread_id': thread.thread_id,
@@ -255,7 +249,7 @@ def view_course_forum_threads(forum_id):
 
 
 # *****************Add a new discussion thread to a forum*****************
-@app.route('/course/forums/threads/new', methods=['POST'])
+@app.route('/api/course/forums/threads/new', methods=['POST'])
 @login_required
 def create_course_forum_thread():
     request_body = request.get_json()
@@ -281,7 +275,7 @@ def create_course_forum_thread():
     return jsonify({"Forum_id ": forum_id, "Status ": "Successfully created thread"}), 201
 
 # *****************Reply to a thread*****************
-@app.route('/course/forums/threads/reply', methods=['POST'])
+@app.route('/api/course/forums/threads/reply', methods=['POST'])
 @login_required
 def reply_to_thread():
     request_body = request.get_json()
@@ -307,8 +301,9 @@ def reply_to_thread():
     
     return jsonify({"Thread_id ": thread_id, "Status ": "Successfully created thread"}), 201
 
+
 # *****************View all replies for a thread*****************
-@app.route('/course/forums/threads/replies/<int:thread_id>', methods=['GET'])
+@app.route('/api/course/forums/threads/replies/<int:thread_id>', methods=['GET'])
 def view_thread_replies(thread_id):
     replies = []
 
@@ -342,3 +337,42 @@ def view_thread_replies(thread_id):
                 }
                 for reply in replies]
     return jsonify({"thread_a_id": thread_id,"thread_a_title": thread.title, "thread_aa_message": thread.message, "thread_replies": replies})
+
+
+# *****************View all course content for a course*****************
+@app.route('/api/course/content/<string:course_code>', methods=['GET'])
+def get_course_content(course_code):
+    content = []
+
+    course_exists(course_code)
+
+    with open('./app/sql/courses/content/getCourseContent.sql', 'r') as file:
+        sql_script = file.read()
+        with app.app_context():
+            course_content = db.session.execute(text(sql_script), {"course_code": course_code}).fetchall()
+
+    for row in course_content:
+        urls = []
+        if row.slide_link:
+            urls.append({"Slide Name": row.slide_name, "Slide Link ": row.slide_link})
+        if row.file_link:
+            urls.append({"File Name": row.file_name, "File Link ": row.file_link})
+        if row.link_link:
+            urls.append({"Link Name": row.link_name, "Url": row.link_link})
+        section_name = row.section_name
+        if not content or content[-1]["section_name"] != section_name:
+            section = {
+                "section_name": section_name,
+                "content": []
+            }
+            content.append(section)
+        content[-1]["content"].append({
+            "content_name": row.content_name,
+            "content_description": row.content_description,
+            "content_type": row.content_type if row.content_type else "Unspecified",
+            "content_url": urls if urls else "No Links"
+    })
+    if content:
+        return jsonify(content)
+    return jsonify(f"No Content found in course: {course_code}")
+    

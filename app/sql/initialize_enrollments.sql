@@ -69,3 +69,12 @@ ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 ROWS
 (score, student_submission, student_id, assignment_id);
+
+-- Add some links for FREN3001
+INSERT INTO CourseLink (link_name, link_description, link_link, course_content_id)
+VALUES 
+    ('Link 1', 'Description of Link 1', 'https://www.link1.com', 1053),
+    ('Link 2', 'Description of Link 2', 'https://www.link2.com', 1058),
+    ('Link 3', 'Description of Link 3', 'https://www.link3.com', 1059),
+    ('Link 4', 'Description of Link 4', 'https://www.link4.com', 1062),
+    ('Link 5', 'Description of Link 5', 'https://www.link5.com', 1064);

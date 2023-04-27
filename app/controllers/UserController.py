@@ -10,7 +10,6 @@ import requests
 
 # *****************Login form*****************
 @app.route('/', methods=['POST', 'GET'])
-@logout_required
 def landing():
     if current_user.is_authenticated:
         # if user is already logged in, just redirect them to our secure page
@@ -40,7 +39,7 @@ def login_web(username, password):
         flash('Username or Password is incorrect.', 'danger')
 
 # *****************Login 1*****************
-@app.route('/login', methods=['POST'])
+@app.route('/api/login', methods=['POST'])
 @logout_required
 def login_postman():
     username = request.json['username']
@@ -53,14 +52,6 @@ def login_postman():
         return jsonify({"message": "Invalid username or password."}), 401
 
 # *****************Logout*****************
-@app.route("/logout_current_user")
-@login_required
-def logout():
-    # Logout the user and end the session
-    logout_user_api()
-    flash('You have been logged out.', 'success')
-    return redirect(url_for('landing'))
-
 @app.route("/logout")
 @login_required
 def logout_user_api():

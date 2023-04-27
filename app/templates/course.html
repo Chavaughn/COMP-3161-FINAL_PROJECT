@@ -1,10 +1,60 @@
-<link rel="stylesheet" href="/static/css/test.css">
-{% extends "base.html" %}
-{% block main %}
-
-<h1 class="display-5 fw-bold">Course Page</h1>
-<!-- <img src="/static/uploads/profilepic.jpg" alt="Profile Picture" class="profile-pic"> -->
-<p>This webpage is about {{ name }}.</p>
-
+<link rel="stylesheet" href="/static/css/home.css"> {% extends "base.html" %} {% block main %}
+<div class="container">
+    <div class="left-section">
+        <div class="home-header-container">
+            <h3 class="course-title">{{course.course_code}}| {{course.course_name}}</h3>
+        </div>
+        <div class="course-box">
+            <p class="course-lecturer">Lecturer Name: {{course.first_name}} {{course.last_name}}</p>
+            <p class="course-description">Course Description:
+                <p>{{course.course_description}}</p>
+            </p>
+            <div class="sections">
+                <p>Course Sections</p>
+                {% for section in sections %}
+                <div class="course-box">
+                    <h3>{{section.section_name}}</h3>
+                    <hr> {% for content_item in section.content %}
+                    <p>{{content_item.content_name}}</p>
+                    <p>{{content_item.content_description}}</p>
+                    {% if content_item.content_url != "No Links"%}
+                    <p>Related Links: </p>
+                    <ul>
+                        {% for url in content_item.content_url %}
+                        <li>
+                            <a href="{{url.link}}">{{url.name}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p><b>No Links</b></p>
+                    {% endif %} {% endfor %}
+                </div>
+                {% endfor%}
+            </div>
+        </div>
+    </div>
+    <div class="right-section">
+        <div class="assignments">
+            <h4>Assignments</h4>
+            <div class="course-box">
+                {% for assignment in assignments %}
+                <a href="{{ url_for('assignment_view', assignment_id=assignment.assignment_id, course_code = course.course_code) }}">
+                    <h4>{{assignment.description}}</h4>
+                </a>
+                <p><strong>Due: </strong>{{assignment.due_date}}</p> {% endfor %}
+            </div>
+        </div>
+        <div id="calendar-box"><img id="calendar" src="/static/uploads/graphics/calendar.jpg"></div>
+        <div class="forums">
+            <h4>Forums</h4>
+            {% for forum in forums %}
+            <div class="course-box">
+                <li>
+                    <a href="{{ url_for('forum_view',course_code = course.course_code, forum_id=forum.forum_id) }}">{{forum.forum_name}}</a>
+                </li>
+            </div> {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}
-
