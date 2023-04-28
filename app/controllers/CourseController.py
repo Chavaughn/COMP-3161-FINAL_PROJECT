@@ -12,7 +12,7 @@ def get_all_courses():
             sql_script = file.read()
             with app.app_context():
                 courses = db.session.execute(text(sql_script)).all()
-            courses = [dict(course_code=course.course_code, Course_Name=(course.course_name)) for course in courses]
+            courses = [dict(course_code=course.course_code, Course_Name=(course.course_name), student_count=course.students) for course in courses]
     return jsonify({"courses":courses}), 200
 
 # *****************Get Courses that a student is enrolled in*****************
@@ -89,7 +89,8 @@ def add_lecturer_course(lecturer_id):
 def get_course_members(course_code):
     members = []
 
-    course_exists(course_code)
+    if course_exists(course_code):
+        return COURSE_NOT_FOUND
 
     with open('./app/sql/courses/getCourseMembers.sql', 'r') as file:
         sql_script = file.read()

@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="/static/css/home.css"> {% extends "base.html" %} {% block main %}
+<div class="container">
+    <div class="left-section">
+        <div class="home-header-container">
+            <h2 id="title">Add a course</h2>
+        </div>
+        <div class="course-box">
+            <div class="row">
+                <div class="col-md-12">
+                    <form method="POST">
+                        {{ form.csrf_token }}
+                        <div class="col-md-12">
+                            {{ form.course_code.label }} {{ form.course_code(size=20, class="form-control") }}
+                        </div>
+                        <div class="col-md-12">
+                            {{ form.course_title.label }} {{ form.course_title(size=20, class="form-control") }}
+                        </div>
+                        <div class="col-md-12">
+                            {{ form.course_description.label }} {{ form.course_description(rows=5, class="form-control") }}
+                        </div>
+                        <div class="col-md-12">
+                            <button class="btn btn-lg btn-primary w-100 mt-3" type="submit">Add a course</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="right-section">
+        <div id="calendar-box"><img id="calendar" src="/static/uploads/graphics/calendar.jpg"></div>
+    </div>
+</div>
+{% endblock %}

@@ -46,6 +46,22 @@
             </div>
         </div>
         <div id="calendar-box"><img id="calendar" src="/static/uploads/graphics/calendar.jpg"></div>
+        <div class="events">
+            <div class="row">
+                <h4>Calendar Events</h4>
+                <a href="{{ url_for('create_calendar_event') }}">
+                    <button class="btn btn-info">Create Event</button>
+                </a>
+            </div>
+
+            {% for event in calendar_events%}
+            <div class="course-box">
+                <li>
+                    {{event.calendar_event_name}}
+
+                </li>
+            </div> {% endfor %}
+        </div>
         <div class="forums">
             <h4>Forums</h4>
             {% for forum in forums %}

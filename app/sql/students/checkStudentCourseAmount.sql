@@ -1,0 +1,1 @@
+SELECT COUNT(student_id) as course_count FROM studentcourse WHERE student_id = :student_id

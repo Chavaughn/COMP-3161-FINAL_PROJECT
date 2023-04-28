@@ -1,24 +1,13 @@
 <link rel="stylesheet" href="/static/css/home.css"> {% extends "base.html" %} {% block main %}
 <div class="container">
     <div class="left-section">
-        <div class="row home-header-container">
-            <div class="col-md-6">
-                <h2 id="title">My Courses</h2>
-            </div>
-            <div class="col-md-6">
-                <a href="{{ url_for('register_for_course_view', username = current_user.username)}}">
-                    <button class="form-control btn btn-primary">
-                        Register for course
-                    </button>
-                </a>
-            </div>
-
+        <div class="home-header-container">
+            <h2 id="title">Courses I teach</h2>
         </div>
         {% for course in courses %}
         <a href="{{ url_for('course_view', course_code=course.course_code) }}">
             <div class="course-box">
                 <h3 class="course-title">{{course.course_code}} {{course.course_name}}</h3>
-                <p class="course-lecturer">{{course.first_name}} {{course.last_name}}</p>
                 <p class="course-description">{{course.course_description}}</p>
             </div>
         </a>

@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS Lecturer (
 
 -- create the Course table
 CREATE TABLE IF NOT EXISTS Course (
-    course_code VARCHAR(16) PRIMARY KEY,
+    course_code VARCHAR(16) NOT NULL PRIMARY KEY,
     course_name VARCHAR(256) NOT NULL,
     course_description VARCHAR(2056) NOT NULL,
     lecturer_id BIGINT UNSIGNED,
@@ -50,6 +50,8 @@ CREATE TABLE IF NOT EXISTS StudentCourse(
     FOREIGN KEY (course_code) REFERENCES Course(course_code),
     FOREIGN KEY (student_id) REFERENCES Student(student_id)
 );
+
+
 
 -- create the Section table
 CREATE TABLE IF NOT EXISTS Section (
@@ -162,7 +164,7 @@ CREATE TABLE IF NOT EXISTS Grade (
     FOREIGN KEY (assignment_id) REFERENCES Assignment (assignment_id)
 );
 
--- create the SrudentUpload table
+-- create the StudentUpload table
 CREATE TABLE IF NOT EXISTS StudentUploads (
     student_id BIGINT UNSIGNED,
     assignment_id BIGINT UNSIGNED,

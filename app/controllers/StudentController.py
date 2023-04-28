@@ -1,11 +1,29 @@
 from flask import jsonify, request
+from flask_login import login_required
 from app.controllers.AppController import *
 from app.json_messages import *
 
 
 # *****************Register Student to Course*****************
-@app.route('/api/course/student/register', methods=['POST'])
-def add_student_to_course(lecturer_id):
+@app.route('/api/course/student=<int:username>/register', methods=['POST'])
+@login_required
+def add_student_to_course(username):
+    data = request.json
+    course_code = data['course_code']
+    student_id = data['student_id']
+    if student_exists(username):
+        return STUDENT_NOT_FOUND
+    if student_course_count_check(student_id):
+        return STUDENT_DOES_MAX
+    if course_exists(course_code):
+        return COURSE_NOT_FOUND
+    if student_in_course_check(student_id, course_code):
+        return STUDENT_IN_COURSE
+    with open('./app/sql/students/registerForCourseStudent.sql', 'r') as file:
+        sql_script = file.read()
+        with app.app_context():
+            db.session.execute(text(sql_script), {"course_code": course_code, "student_id": student_id})
+            db.session.commit()
     return ADDED_TO_COURSE_STUDENT
 
 # *****************Get Calendar Events for student for date*****************
@@ -13,7 +31,8 @@ def add_student_to_course(lecturer_id):
 def get_student_calendar_events(username, date):
     events = []
     calendar_events = []
-    student_exists(username)
+    if student_exists(username):
+        return STUDENT_NOT_FOUND
 
     with open('./app/sql/students/events/getAllCalendarEventsForStudent.sql', 'r') as file:
         sql_script = file.read()

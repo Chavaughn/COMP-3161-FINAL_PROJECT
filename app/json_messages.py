@@ -11,7 +11,10 @@ with app.app_context():
     ADDED_TO_COURSE_LECTURER = jsonify({"message": "Lecturer added to course"}), 200
     ADDED_TO_COURSE_STUDENT = jsonify({"message": "Student registered for course"}), 200
     LECTURER_TOO_MANY = jsonify({"message": "Lecturer is already teaching 5 courses!"}), 401
-    
+    STUDENT_DOES_MAX = jsonify({"message": "Student is already enrolled in 6 courses!"}), 401
+    STUDENT_IN_COURSE = jsonify({"message": "Student is already enrolled in course!"}), 401
+    COURSE_EXISTS_ALREADY = jsonify({"message": "Course already exists"}), 401
+
     CALENDAR_EVENT_CREATED = jsonify({"message": "Calendar event created successfully."}), 201
     FORUM_CREATED = jsonify({"message": "Forum event created successfully."}), 201
 

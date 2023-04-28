@@ -9,22 +9,11 @@ import requests
 
 
 # *****************Login form*****************
-@app.route('/', methods=['POST', 'GET'])
+@app.route('/')
+@logout_required
 def landing():
-    if current_user.is_authenticated:
-        # if user is already logged in, just redirect them to our secure page
-        flash('User is already logged in.', 'info')
-        return redirect(url_for('placeholder'))
-
-    registration_form = RegistrationForm()
-    login_form = LoginForm()
-    # Login and validate the user.
-    if login_form.validate_on_submit():
-        if login_web(username=login_form.username.data, password=login_form.password.data) == 200:
-            next_page = request.args.get('next')
-            return redirect(next_page or url_for('placeholder'))
-    flash_errors(login_form)
-    return render_template('landing.html', lform = login_form, rform = registration_form)
+    
+    return render_template('landing.html')
 
 # *****************Login 2*****************
 @app.route('/loginw', methods=['POST'])

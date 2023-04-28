@@ -13,8 +13,7 @@ def register_postman():
     account_type = request.json['account_type']
     last_username = 0
     if current_user.is_authenticated:
-        flash('User is already logged in.', 'info')
-        return redirect(url_for('landing'))
+        return jsonify({'message':"user logged in"}), 401
     with open('./app/sql/students/getLastUsername.sql', 'r') as file:
         sql_script = file.read()
         with app.app_context():

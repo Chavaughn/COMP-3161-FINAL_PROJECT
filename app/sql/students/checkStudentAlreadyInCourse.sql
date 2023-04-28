@@ -1,0 +1,1 @@
+SELECT * FROM studentcourse WHERE student_id = :student_id AND course_code = :course_code

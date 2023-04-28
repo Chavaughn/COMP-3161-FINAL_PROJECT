@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="/static/css/home.css"> {% extends "base.html" %} {% block main %}
+<div class="container">
+    <div class="left-section">
+        <div class="home-header-container">
+            <h2 id="title">Add a Calendar Event</h2>
+        </div>
+        <div class="course-box">
+            <div class="row">
+                <div class="col-md-12">
+                    <form method="POST">
+                        {{ form.csrf_token }}
+                        <div class="col-md-12">
+                            <select class="form-control" id="course" name="course_code">
+                            {% for course in courses %}
+                            <option value="{{ course.course_code }}">{{ course.course_code }}</option>
+                            {% endfor %}
+                        </select></div>
+                        <div class="col-md-12">
+                            {{ form.calendar_event_name.label }} {{ form.calendar_event_name(size=20, class="form-control") }}
+                        </div>
+                        <div class="col-md-12">
+                            {{ form.due_date.label }} {{ form.due_date(class="form-control") }}
+                        </div>
+                        <div class="col-md-12">
+                            <button class="btn btn-lg btn-primary w-100 mt-3" type="submit">Create event</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="right-section">
+        <div id="calendar-box"><img id="calendar" src="/static/uploads/graphics/calendar.jpg"></div>
+    </div>
+</div>
+{% endblock %}

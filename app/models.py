@@ -44,3 +44,15 @@ class Account(db.Model):
 
     def __repr__(self):
         return '<User %r>' % (self.username)
+    
+class Lecturer(db.Model):
+    __tablename__ = 'lecturer'
+    lecturer_id = db.Column(db.Integer, primary_key=True)
+    account_id = db.Column(db.Integer, db.ForeignKey('account.account_id'))
+    account = db.relationship('Account', backref='Lecturer')
+
+class Student(db.Model):
+    __tablename__ = 'student'
+    student_id = db.Column(db.Integer, primary_key=True)
+    account_id = db.Column(db.Integer, db.ForeignKey('account.account_id'))
+    account = db.relationship('Account', backref='Student')

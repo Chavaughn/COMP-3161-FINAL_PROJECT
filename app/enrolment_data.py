@@ -51,16 +51,16 @@ with open('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/enrollments.csv', mode=
         num_courses = random.randint(3, 6)
 
         # Choose courses for the student
-        chosen_courses = []
+        chosen_courses = set()
         student_enrollment_data.setdefault(student_id, {'courses': []})
-        while len(chosen_courses) < num_courses:
+        while len(chosen_courses) != num_courses:
             course_code = random.choice(course_codes)
             course_count[course_code] += 1  # increment the count for the course
             if course_count[course_code] <= 10:  # check if the count is less than or equal to 10
-                chosen_courses.append(course_code)
+                chosen_courses.add(course_code)
             else:
-                chosen_courses.append(random.choice(course_codes))
-            #print(f"k:{k}")
+                chosen_courses.add(random.choice(course_codes))
+
         # Increment the count for the chosen courses and student
         for course_code in chosen_courses:
             student_count[student_id] += 1
